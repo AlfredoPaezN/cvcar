@@ -1,55 +1,52 @@
+import 'package:cvcar_mobile/app/global/custom_button.dart';
+import 'package:cvcar_mobile/app/global/frosted_glass.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../controllers/onboarding_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
-  final PageController _pageController = PageController();
-
   OnboardingView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
+    return Scaffold(
+      body: Obx(
+        () => Stack(
           children: [
             PageView(
-              controller: _pageController,
+              controller: controller.pageController.value,
               onPageChanged: (page) {
                 controller.currentPage.value = page;
+                controller.getTitle(page);
+                controller.getSubtitle(page);
               },
               physics: const BouncingScrollPhysics(),
               children: const [
                 _View(
-                  image: _LoadPngImage(
-                      path: 'assets/images/tracking-realtime.png'),
-                  title: 'Tracking Realtime',
-                  description:
-                      'The easiest way to track your fleet in realtime!',
+                  image: _LoadPngImage(path: 'assets/onboarding/ob1.png'),
                 ),
                 _View(
-                  image:
-                      _LoadPngImage(path: 'assets/images/fleet-management.png'),
-                  title: 'Manage a Fleet',
-                  description: 'Add and manage all your fleet',
+                  image: _LoadPngImage(path: 'assets/onboarding/ob2.png'),
                 ),
                 _View(
-                  image: _LoadPngImage(path: 'assets/images/is-free.png'),
-                  title: 'IS FREE!!',
-                  description: 'Your account is Freemium',
+                  image: _LoadPngImage(path: 'assets/onboarding/ob3.png'),
                 ),
               ],
             ),
-            Obx(
-              () => _BottomSection(
-                currentPage: controller.currentPage.value,
-                pageController: _pageController,
-              ),
-            )
+            Positioned(
+                top: 35.h,
+                left: 40.w,
+                child: Image.asset(
+                  "assets/logo/isotipo_blanco.png",
+                  scale: 9.0,
+                )),
+            _BottomSection(
+              currentPage: controller.currentPage.value,
+              pageController: controller.pageController.value,
+            ),
           ],
         ),
       ),
@@ -67,15 +64,14 @@ class _LoadPngImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 0.55.sw,
-      constraints: const BoxConstraints(maxWidth: 400),
-      child: Image.asset(path),
+    return Image.asset(
+      path,
+      fit: BoxFit.fitHeight,
     );
   }
 }
 
-class _BottomSection extends StatelessWidget {
+class _BottomSection extends GetView<OnboardingController> {
   const _BottomSection({
     Key? key,
     required this.currentPage,
@@ -88,98 +84,134 @@ class _BottomSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OnboardingController controller = OnboardingController();
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        child: Column(
           children: [
-            Expanded(
-              child: currentPage <= 1
-                  ? TextButton(
-                      onPressed: () => controller.navigationRoutes(),
-                      child: Text(
-                        'Skip',
-                      ),
-                    )
-                  : Container(),
+            Center(
+              child: SmoothPageIndicator(
+                controller: _pageController,
+                count: 3,
+                effect: WormEffect(
+                    dotColor: Colors.grey,
+                    activeDotColor: Colors.white,
+                    dotWidth: 8.w,
+                    dotHeight: 8.h),
+                onDotClicked: (index) => _pageController.animateToPage(index,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInBack),
+              ),
             ),
-            Expanded(
-              child: Center(
-                child: SmoothPageIndicator(
-                  controller: _pageController,
-                  count: 3,
-                  effect: WormEffect(
-                      dotColor: Colors.yellow,
-                      activeDotColor: Colors.red,
-                      dotWidth: 14.w,
-                      dotHeight: 14.h),
-                  onDotClicked: (index) => _pageController.animateToPage(index,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInBack),
+            SizedBox(
+              height: 20.h,
+            ),
+            Obx(
+              () => FrostedGlassBox(
+                theWidth: double.infinity,
+                theHeight: 250.0.h,
+                theChild: BottomContainer(
+                  title: controller.title.value,
+                  detail: controller.subtitle.value,
+                  isLastPage: currentPage == 2,
+                  firtButton: currentPage <= 1
+                      ? () {
+                          _pageController.animateToPage(currentPage + 1,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.linear);
+                        }
+                      : () => controller.navigationRoutes(),
+                  secondButton: currentPage <= 1
+                      ? () => controller.navigationRoutes()
+                      : () {},
                 ),
               ),
             ),
-            Expanded(
-              child: currentPage <= 1
-                  ? TextButton(
-                      onPressed: () {
-                        _pageController.animateToPage(currentPage + 1,
-                            duration: const Duration(milliseconds: 100),
-                            curve: Curves.bounceIn);
-                      },
-                      child: Text('Next'),
-                    )
-                  : TextButton(
-                      onPressed: () => controller.navigationRoutes(),
-                      child: Text(
-                        'Done',
-                      ),
-                    ),
-            ),
           ],
-        ),
-      ],
-    );
+        ));
   }
 }
 
 class _View extends StatelessWidget {
-  final String title;
-  final String description;
   final Widget? image;
 
   const _View({
     Key? key,
-    required this.title,
-    required this.description,
     this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          image ?? const SizedBox(),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.h),
-            child: Text(
-              title,
+    return image ?? const SizedBox();
+  }
+}
+
+class BottomContainer extends StatelessWidget {
+  final String title;
+  final String detail;
+  final Function() firtButton;
+  final Function() secondButton;
+  final bool isLastPage;
+  const BottomContainer({
+    Key? key,
+    required this.title,
+    required this.detail,
+    required this.firtButton,
+    required this.secondButton,
+    required this.isLastPage,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250.h,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 41, left: 37, right: 37),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 100.h,
+              child: Column(children: [
+                Text(title,
+                    style: const TextStyle(
+                        decoration: TextDecoration.none,
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.center),
+                const SizedBox(
+                  height: 17,
+                ),
+                Text(detail,
+                    style: const TextStyle(
+                        decoration: TextDecoration.none,
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal),
+                    textAlign: TextAlign.center),
+              ]),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.h),
-            child: Text(
-              description,
+            const SizedBox(height: 23.5),
+            CustomButton(
+              color: Colors.red,
+              label: isLastPage ? "Comenzar" : "Siguiente",
+              action: firtButton,
+              fontSize: 16,
             ),
-          ),
-        ],
+            CustomButton(
+              color: Colors.transparent,
+              label: "Omitir",
+              action: secondButton,
+              fontSize: 16,
+            ),
+          ],
+        ),
       ),
     );
   }
