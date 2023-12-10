@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             fontFamily: 'Roboto',
             scaffoldBackgroundColor: const Color(CVCarColors.backgroundColor)),
+        themeMode: ThemeMode.dark,
         initialRoute: Routes.SPLASH,
         getPages: AppPages.routes,
       ),

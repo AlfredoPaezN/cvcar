@@ -3,6 +3,7 @@ import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_button.dart';
 import 'package:cvcar_mobile/app/global/custom_divider.dart';
 import 'package:cvcar_mobile/app/global/custom_text_form_field.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,13 +18,19 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: SizedBox(
-        height: 70.h,
-        child: CustomButton(
-            color: Color(CVCarColors.backgroundColor),
-            label: "Crear una cuenta CVCAR",
-            textColor: Color(CVCarColors.secondaryColor),
-            fontSize: 12.h,
-            action: () {}),
+        height: 60.h,
+        child: Center(
+          child: GestureDetector(
+            onTap: () {
+              Get.toNamed(Routes.REGISTER);
+            },
+            child: Label(
+              label: 'Crea una cuenta CVCAR',
+              sizeFont: 12.h,
+              fontcolor: Color(CVCarColors.secondaryColor),
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -97,7 +104,9 @@ class LoginView extends GetView<LoginController> {
             CustomButton(
                 color: Color(CVCarColors.secondaryColor),
                 label: "Iniciar sesión",
-                action: () {}),
+                action: () {
+                  Get.offAndToNamed(Routes.REGISTER_VEHICLE);
+                }),
             // const IndicatorDivisor(),
             SizedBox(
               height: 43,

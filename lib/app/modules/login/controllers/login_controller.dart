@@ -7,7 +7,6 @@ class LoginController extends GetxController {
   final passController = TextEditingController().obs;
   RxBool isPasswordVisible = false.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -43,13 +42,4 @@ class LoginController extends GetxController {
             ),
           );
   }
-
-  revealPassword() {
-    return IconButton(
-      onPressed: () {},
-      icon: const Icon(Icons.remove_red_eye_outlined),
-    );
-  }
-
-  void increment() => count.value++;
 }

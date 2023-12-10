@@ -1,9 +1,15 @@
 import 'package:get/get.dart';
 
+import '../modules/app_navigation/bindings/app_navigation_binding.dart';
+import '../modules/app_navigation/views/app_navigation_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
+import '../modules/register_vehicle/bindings/register_vehicle_binding.dart';
+import '../modules/register_vehicle/views/register_vehicle_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -30,6 +36,21 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => const RegisterView(),
+      binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTER_VEHICLE,
+      page: () => const RegisterVehicleView(),
+      binding: RegisterVehicleBinding(),
+    ),
+    GetPage(
+      name: _Paths.APP_NAVIGATION,
+      page: () => const AppNavigationView(),
+      binding: AppNavigationBinding(),
     ),
   ];
 }
