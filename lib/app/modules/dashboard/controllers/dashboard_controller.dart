@@ -1,9 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
-  //TODO: Implement DashboardController
+  final vehiclesAssigned = TextEditingController().obs;
 
-  final count = 0.obs;
+  List<DropdownMenuItem<String>> availableVehicles = [
+    const DropdownMenuItem(
+      child: Text('Mazda Allegro'),
+      value: 'Mazda Allegro',
+    ),
+    const DropdownMenuItem(
+      child: Text('Mazda 3'),
+      value: 'Mazda 3',
+    ),
+    const DropdownMenuItem(
+      child: Text('+ Agregar nuevo vehículo'),
+      value: '+ Agregar nuevo vehículo',
+    ),
+  ];
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +33,4 @@ class DashboardController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

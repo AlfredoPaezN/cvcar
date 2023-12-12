@@ -12,6 +12,7 @@ class CustomDropdownFormField extends StatelessWidget {
     this.labelText,
     this.icon,
     this.enabled = true,
+    this.enableBorder = true,
     this.validator,
     this.width,
     this.fillColor,
@@ -24,6 +25,7 @@ class CustomDropdownFormField extends StatelessWidget {
   final String? labelText;
   final Widget? icon;
   final bool enabled;
+  final bool enableBorder;
   final String? Function(dynamic)? validator;
   final double? width;
   final Color? fillColor;
@@ -37,11 +39,27 @@ class CustomDropdownFormField extends StatelessWidget {
       width: width ?? double.infinity,
       child: DropdownButtonFormField<dynamic>(
         value: value,
+        alignment: Alignment.centerRight,
         items: items,
         onChanged: (e) {
-          print("e: $e");
           onChanged(e);
         },
+        selectedItemBuilder: enableBorder
+            ? null
+            : (BuildContext context) {
+                return items.map<Widget>((DropdownMenuItem item) {
+                  return Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      item.value.toString(),
+                      style: TextStyle(
+                        color: enabled ? Colors.white : Colors.grey.shade400,
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                  );
+                }).toList();
+              },
         decoration: InputDecoration(
           labelText: labelText,
           isDense: true,
@@ -65,17 +83,19 @@ class CustomDropdownFormField extends StatelessWidget {
               color: Colors.transparent,
             ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.r),
-            ),
-            borderSide: BorderSide(
-              width: 1.2,
-              color: enabled
-                  ? Color(CVCarColors.secondaryColor)
-                  : Colors.grey.shade300,
-            ),
-          ),
+          focusedBorder: enableBorder
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(4.r),
+                  ),
+                  borderSide: BorderSide(
+                    width: 1.2,
+                    color: enabled
+                        ? Color(CVCarColors.secondaryColor)
+                        : Colors.grey.shade300,
+                  ),
+                )
+              : InputBorder.none,
           filled: true,
           fillColor: fillColor ?? Color(CVCarColors.primaryColor),
         ),
@@ -83,7 +103,8 @@ class CustomDropdownFormField extends StatelessWidget {
           color: enabled ? Colors.white : Colors.grey.shade400,
           fontSize: 12.sp,
         ),
-        dropdownColor: fillColor ?? Color(CVCarColors.primaryColor),
+        elevation: 4,
+        dropdownColor: fillColor ?? Color(CVCarColors.backgroundColor),
         iconEnabledColor: Colors.white,
         validator: validator,
         isExpanded: true,

@@ -71,7 +71,7 @@ flutter:
     - assets/menu_icons/
     # - assets/iconoscategories/
     - assets/informative/
-    # - assets/web/
+    - assets/web/
     - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
