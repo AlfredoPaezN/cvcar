@@ -9,6 +9,10 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const REGISTER_VEHICLE = _Paths.REGISTER_VEHICLE;
   static const APP_NAVIGATION = _Paths.APP_NAVIGATION;
+  static const DASHBOARD = _Paths.DASHBOARD;
+  static const PIT_AREA = _Paths.PIT_AREA;
+  static const RESERVATIONS = _Paths.RESERVATIONS;
+  static const MY_ACCOUNT = _Paths.MY_ACCOUNT;
 }
 
 abstract class _Paths {
@@ -19,4 +23,8 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const REGISTER_VEHICLE = '/register-vehicle';
   static const APP_NAVIGATION = '/app-navigation';
+  static const DASHBOARD = '/dashboard';
+  static const PIT_AREA = '/pit-area';
+  static const RESERVATIONS = '/reservations';
+  static const MY_ACCOUNT = '/my-account';
 }

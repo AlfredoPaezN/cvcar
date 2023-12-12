@@ -39,7 +39,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   get_storage: ^2.1.1
   animate_do: ^3.1.2
-  persistent_bottom_nav_bar_v2: ^4.2.8
+  persistent_bottom_nav_bar: ^5.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +68,7 @@ flutter:
   assets:
     - assets/logo/
     - assets/onboarding/
-    # - assets/iconosmenu/
+    - assets/menu_icons/
     # - assets/iconoscategories/
     - assets/informative/
     # - assets/web/

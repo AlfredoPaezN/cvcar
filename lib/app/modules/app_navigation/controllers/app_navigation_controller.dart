@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class AppNavigationController extends GetxController {
-  //TODO: Implement AppNavigationController
+  PersistentTabController tabController =
+      PersistentTabController(initialIndex: 0);
 
-  final count = 0.obs;
+  RxInt pageIndexSelected = 0.obs;
+  RxString currentPageName = ''.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +22,4 @@ class AppNavigationController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
