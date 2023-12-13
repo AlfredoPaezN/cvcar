@@ -54,7 +54,7 @@ class CustomDropdownFormField extends StatelessWidget {
                       item.value.toString(),
                       style: TextStyle(
                         color: enabled ? Colors.white : Colors.grey.shade400,
-                        fontSize: 12.sp,
+                        fontSize: enableBorder ? 12.sp : 17.sp,
                       ),
                     ),
                   );

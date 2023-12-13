@@ -19,6 +19,34 @@ class DashboardController extends GetxController {
     ),
   ];
 
+  final categories = [
+    {
+      "image": "assets/categories/SOAT.png",
+      "title": "SOAT",
+      "status": "Vigente",
+    },
+    {
+      "image": "assets/categories/tecnomecanica.png",
+      "title": "Tecno mecánica",
+      "status": "Vigente",
+    },
+    {
+      "image": "assets/categories/extintor.png",
+      "title": "Extintor",
+      "status": "Vigente",
+    },
+    {
+      "image": "assets/categories/cambiodeaceite.png",
+      "title": "Aceite",
+      "status": "Configurar",
+    },
+    {
+      "image": "assets/categories/kitdecarretera.png",
+      "title": "Kit de carretera",
+      "status": "Configurar",
+    },
+  ];
+
   @override
   void onInit() {
     super.onInit();
