@@ -120,7 +120,7 @@ class RegisterVehicleView extends GetView<RegisterVehicleController> {
                 color: Color(CVCarColors.secondaryColor),
                 label: "Registrar vehículo",
                 action: () {
-                  Get.offAndToNamed(Routes.REGISTER_VEHICLE);
+                  Get.offAndToNamed(Routes.APP_NAVIGATION);
                 }),
             // const IndicatorDivisor(),
           ],

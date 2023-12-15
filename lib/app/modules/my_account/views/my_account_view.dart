@@ -1,6 +1,6 @@
-import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_tile.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -130,7 +130,7 @@ class SettingsSectin extends StatelessWidget {
           height: 15.h,
         ),
         CustomTileField(
-          justTopRounded: borderRadius.top,
+          justTopRounded: BorderRadiusEnum.top,
           trainingIcon: Image.asset(
             "assets/informative/notificaciones.png",
             width: 10.h,
@@ -144,7 +144,7 @@ class SettingsSectin extends StatelessWidget {
           color: Color(CVCarColors.grey).withOpacity(0.3),
         ),
         CustomTileField(
-          justTopRounded: borderRadius.none,
+          justTopRounded: BorderRadiusEnum.none,
           trainingIcon: Image.asset(
             "assets/informative/preguntas-frecuentes.png",
             width: 10.h,
@@ -158,7 +158,7 @@ class SettingsSectin extends StatelessWidget {
           color: Color(CVCarColors.grey).withOpacity(0.3),
         ),
         CustomTileField(
-          justTopRounded: borderRadius.none,
+          justTopRounded: BorderRadiusEnum.none,
           trainingIcon: Image.asset(
             "assets/informative/politicas-de-privacidad.png",
             width: 10.h,
@@ -172,7 +172,7 @@ class SettingsSectin extends StatelessWidget {
           color: Color(CVCarColors.grey).withOpacity(0.3),
         ),
         CustomTileField(
-          justTopRounded: borderRadius.none,
+          justTopRounded: BorderRadiusEnum.none,
           trainingIcon: Image.asset(
             "assets/informative/contactanos.png",
             width: 10.h,
@@ -186,7 +186,7 @@ class SettingsSectin extends StatelessWidget {
           color: Color(CVCarColors.grey).withOpacity(0.3),
         ),
         CustomTileField(
-          justTopRounded: borderRadius.bottom,
+          justTopRounded: BorderRadiusEnum.bottom,
           trainingIcon: Image.asset(
             "assets/informative/cvcar-isotipo-gris.png",
             width: 13.h,
@@ -199,14 +199,19 @@ class SettingsSectin extends StatelessWidget {
           width: double.infinity,
           color: Color(CVCarColors.grey).withOpacity(0.3),
         ),
-        CustomTileField(
-          justTopRounded: borderRadius.bottom,
-          trainingIcon: Image.asset(
-            "assets/informative/cerrar-sesion.png",
-            width: 9.h,
+        GestureDetector(
+          onTap: () {
+            Get.offAllNamed(Routes.LOGIN);
+          },
+          child: CustomTileField(
+            justTopRounded: BorderRadiusEnum.bottom,
+            trainingIcon: Image.asset(
+              "assets/informative/cerrar-sesion.png",
+              width: 9.h,
+            ),
+            trailiingIcon: const SizedBox(),
+            label: "Cerrar sesión",
           ),
-          trailiingIcon: const SizedBox(),
-          label: "Cerrar sesión",
         ),
       ],
     ));

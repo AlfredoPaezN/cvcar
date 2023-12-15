@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,9 +22,14 @@ class DashboardView extends GetView<DashboardController> {
           padding: const EdgeInsets.only(top: 40.0, left: 25, right: 25),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4),
-            child: Image.asset(
-              'assets/web/livianos.png',
-              fit: BoxFit.cover,
+            child: GestureDetector(
+              onTap: () {
+                // Get.toNamed(Routes.VEHICLE_DETAIL);
+              },
+              child: Image.asset(
+                'assets/web/promo.png',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -62,7 +68,9 @@ class DashboardView extends GetView<DashboardController> {
               OptionShort(
                 label: 'Detalles del vehículo',
                 imagePath: "assets/informative/detalles del vehículo.png",
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(Routes.VEHICLE_DETAIL);
+                },
               ),
             ],
           ),

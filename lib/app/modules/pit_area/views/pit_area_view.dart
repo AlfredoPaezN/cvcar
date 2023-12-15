@@ -24,7 +24,7 @@ class PitAreaView extends GetView<PitAreaController> {
                 'assets/categories/construccion.png',
                 width: 2400,
               ),
-              const Label(label: "Pagina en construcción")
+              const Label(label: "En construcción")
             ],
           ),
         ),

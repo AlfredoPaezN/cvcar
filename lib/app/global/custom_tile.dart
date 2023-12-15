@@ -4,40 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTileField extends StatelessWidget {
-  CustomTileField({
+  const CustomTileField({
     Key? key,
     required this.trainingIcon,
     required this.trailiingIcon,
     required this.label,
-    this.justTopRounded = borderRadius.all,
+    this.justTopRounded = BorderRadiusEnum.all,
   }) : super(key: key);
 
-  Widget trainingIcon;
-  Widget trailiingIcon;
-  String label;
-  Enum justTopRounded;
+  final Widget trainingIcon;
+  final Widget trailiingIcon;
+  final String label;
+  final Enum justTopRounded;
 
   @override
   Widget build(BuildContext context) {
     BorderRadiusGeometry? setBorder() {
       switch (justTopRounded) {
-        case borderRadius.all:
+        case BorderRadiusEnum.all:
           return BorderRadius.circular(5);
 
-        case borderRadius.top:
-          return BorderRadius.only(
+        case BorderRadiusEnum.top:
+          return const BorderRadius.only(
             topLeft: Radius.circular(5),
             topRight: Radius.circular(5),
           );
 
-        case borderRadius.none:
+        case BorderRadiusEnum.none:
           return null;
-        case borderRadius.bottom:
-          return BorderRadius.only(
+        case BorderRadiusEnum.bottom:
+          return const BorderRadius.only(
             bottomLeft: Radius.circular(5),
             bottomRight: Radius.circular(5),
           );
       }
+      return null;
     }
 
     return Container(
@@ -72,4 +73,4 @@ class CustomTileField extends StatelessWidget {
   }
 }
 
-enum borderRadius { all, top, none, bottom }
+enum BorderRadiusEnum { all, top, none, bottom }

@@ -13,6 +13,7 @@ abstract class Routes {
   static const PIT_AREA = _Paths.PIT_AREA;
   static const RESERVATIONS = _Paths.RESERVATIONS;
   static const MY_ACCOUNT = _Paths.MY_ACCOUNT;
+  static const VEHICLE_DETAIL = _Paths.VEHICLE_DETAIL;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const PIT_AREA = '/pit-area';
   static const RESERVATIONS = '/reservations';
   static const MY_ACCOUNT = '/my-account';
+  static const VEHICLE_DETAIL = '/vehicle-detail';
 }

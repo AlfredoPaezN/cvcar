@@ -24,7 +24,7 @@ class ReservationsView extends GetView<ReservationsController> {
                 'assets/categories/construccion.png',
                 width: 2400,
               ),
-              const Label(label: "Pagina en construcción")
+              const Label(label: "En construcción")
             ],
           ),
         ),

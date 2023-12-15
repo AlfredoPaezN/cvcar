@@ -20,6 +20,8 @@ import '../modules/reservations/bindings/reservations_binding.dart';
 import '../modules/reservations/views/reservations_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/vehicle_detail/bindings/vehicle_detail_binding.dart';
+import '../modules/vehicle_detail/views/vehicle_detail_view.dart';
 
 part 'app_routes.dart';
 
@@ -59,11 +61,15 @@ class AppPages {
       name: _Paths.APP_NAVIGATION,
       page: () => const AppNavigationView(),
       binding: AppNavigationBinding(),
+      transitionDuration: const Duration(milliseconds: 200),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
       binding: DashboardBinding(),
+      transitionDuration: const Duration(milliseconds: 200),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.PIT_AREA,
@@ -79,6 +85,13 @@ class AppPages {
       name: _Paths.MY_ACCOUNT,
       page: () => const MyAccountView(),
       binding: MyAccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.VEHICLE_DETAIL,
+      page: () => const VehicleDetailView(),
+      binding: VehicleDetailBinding(),
+      transitionDuration: const Duration(milliseconds: 200),
+      transition: Transition.fade,
     ),
   ];
 }

@@ -25,6 +25,7 @@ class AppNavigationView extends GetView<AppNavigationController> {
 
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           toolbarHeight: 50.h,
           backgroundColor: Color(CVCarColors.primaryColor),
           title: Padding(
@@ -44,7 +45,7 @@ class AppNavigationView extends GetView<AppNavigationController> {
                     enableBorder: false,
                     onChanged: (value) {
                       if (value == '+ Agregar nuevo vehículo') {
-                        Get.toNamed(Routes.REGISTER);
+                        Get.toNamed(Routes.REGISTER_VEHICLE);
                       } else {
                         controller.vehiclesAssigned.value.text =
                             value.toString();
