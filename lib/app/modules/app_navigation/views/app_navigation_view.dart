@@ -1,5 +1,7 @@
+import 'package:cvcar_mobile/app/global/custom_dropdown_form_field.dart';
 import 'package:cvcar_mobile/app/modules/app_navigation/widget/bottom_navbar_style.dart';
 import 'package:cvcar_mobile/app/routes/app_menu.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +24,42 @@ class AppNavigationView extends GetView<AppNavigationController> {
     }
 
     return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 50.h,
+          backgroundColor: Color(CVCarColors.primaryColor),
+          title: Padding(
+            padding: const EdgeInsets.only(top: 15.0, bottom: 15, left: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  'assets/logo/isotipo_color.png',
+                  width: 40.h,
+                ),
+                Obx(
+                  () => CustomDropdownFormField(
+                    width: 200.w,
+                    items: controller.availableVehicles,
+                    // hint: 'Tipo de documento',
+                    enableBorder: false,
+                    onChanged: (value) {
+                      if (value == '+ Agregar nuevo vehículo') {
+                        Get.toNamed(Routes.REGISTER);
+                      } else {
+                        controller.vehiclesAssigned.value.text =
+                            value.toString();
+                      }
+                    },
+
+                    value: controller.vehiclesAssigned.value.text.isNotEmpty
+                        ? controller.vehiclesAssigned.value.text
+                        : controller.availableVehicles.first.value,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         bottomNavigationBar: Container(
           height: 30.h,
           color: Color(CVCarColors.primaryColor),

@@ -115,16 +115,16 @@ class LoginView extends GetView<LoginController> {
             const SizedBox(
               height: 30,
             ),
-            CustomButton(
-                color: Color(CVCarColors.primaryColor),
-                label: "Continuar con Google",
-                fontSize: 11.h,
-                prefixWidget: Image.asset(
-                  'assets/logo/google.png',
-                  height: 15.h,
-                  width: 15.w,
-                ),
-                action: () {}),
+            // CustomButton(
+            //     color: Color(CVCarColors.primaryColor),
+            //     label: "Continuar con Google",
+            //     fontSize: 11.h,
+            //     prefixWidget: Image.asset(
+            //       'assets/logo/google.png',
+            //       height: 15.h,
+            //       width: 15.w,
+            //     ),
+            //     action: () {}),
           ],
         ),
       ),

@@ -1,5 +1,9 @@
+import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
+import 'package:cvcar_mobile/app/global/custom_tile.dart';
+import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -10,23 +14,201 @@ class MyAccountView extends GetView<MyAccountController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(
-              "assets/logo/logo_completo.png",
-              width: 200,
+      body: ListView(
+        padding: const EdgeInsets.all(25.0),
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/categories/micuenta.png",
+                      width: 30.h,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Label(label: "Mi cuenta", sizeFont: 16.h),
+                  ],
+                ),
+              ),
+              Container(
+                height: 25.h,
+                width: 80.w,
+                padding: EdgeInsets.all(5.h),
+                decoration: BoxDecoration(
+                  color: Color(CVCarColors.primaryColor),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(
+                      "assets/informative/coins.png",
+                      width: 15.h,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Label(
+                      label: "100",
+                      sizeFont: 12.h,
+                      fontcolor: Colors.white,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          CustomTileField(
+            trainingIcon: Image.asset(
+              "assets/informative/usuario.png",
+              width: 10.h,
             ),
-            Image.asset(
-              'assets/categories/construccion.png',
-              width: 2400,
+            trailiingIcon: Image.asset(
+              "assets/informative/editar.png",
+              width: 25.h,
             ),
-            const Label(label: "Pagina en construcción")
-          ],
-        ),
+            label: "Andrea Daguer",
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          CustomTileField(
+            trainingIcon: Image.asset(
+              "assets/informative/mail.png",
+              width: 10.h,
+            ),
+            trailiingIcon: Image.asset(
+              "assets/informative/editar.png",
+              width: 25.h,
+            ),
+            label: "andreadaguer@gmail.com",
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          CustomTileField(
+            trainingIcon: Image.asset(
+              "assets/informative/phone.png",
+              width: 10.h,
+            ),
+            trailiingIcon: Image.asset(
+              "assets/informative/editar.png",
+              width: 25.h,
+            ),
+            label: "301 627 6346",
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          SettingsSectin(),
+        ],
       ),
     );
+  }
+}
+
+class SettingsSectin extends StatelessWidget {
+  const SettingsSectin({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Label(label: "Ajustes", sizeFont: 12.h),
+        SizedBox(
+          height: 15.h,
+        ),
+        CustomTileField(
+          justTopRounded: borderRadius.top,
+          trainingIcon: Image.asset(
+            "assets/informative/notificaciones.png",
+            width: 10.h,
+          ),
+          trailiingIcon: const SizedBox(),
+          label: "Notificaciones",
+        ),
+        Container(
+          height: 1.h,
+          width: double.infinity,
+          color: Color(CVCarColors.grey).withOpacity(0.3),
+        ),
+        CustomTileField(
+          justTopRounded: borderRadius.none,
+          trainingIcon: Image.asset(
+            "assets/informative/preguntas-frecuentes.png",
+            width: 10.h,
+          ),
+          trailiingIcon: const SizedBox(),
+          label: "Preguntas frecuentes",
+        ),
+        Container(
+          height: 1.h,
+          width: double.infinity,
+          color: Color(CVCarColors.grey).withOpacity(0.3),
+        ),
+        CustomTileField(
+          justTopRounded: borderRadius.none,
+          trainingIcon: Image.asset(
+            "assets/informative/politicas-de-privacidad.png",
+            width: 10.h,
+          ),
+          trailiingIcon: const SizedBox(),
+          label: "Politicas de privacidad",
+        ),
+        Container(
+          height: 1.h,
+          width: double.infinity,
+          color: Color(CVCarColors.grey).withOpacity(0.3),
+        ),
+        CustomTileField(
+          justTopRounded: borderRadius.none,
+          trainingIcon: Image.asset(
+            "assets/informative/contactanos.png",
+            width: 10.h,
+          ),
+          trailiingIcon: const SizedBox(),
+          label: "Contactános",
+        ),
+        Container(
+          height: 1.h,
+          width: double.infinity,
+          color: Color(CVCarColors.grey).withOpacity(0.3),
+        ),
+        CustomTileField(
+          justTopRounded: borderRadius.bottom,
+          trainingIcon: Image.asset(
+            "assets/informative/cvcar-isotipo-gris.png",
+            width: 13.h,
+          ),
+          trailiingIcon: const SizedBox(),
+          label: "Sobre CVCAR",
+        ),
+        Container(
+          height: 1.h,
+          width: double.infinity,
+          color: Color(CVCarColors.grey).withOpacity(0.3),
+        ),
+        CustomTileField(
+          justTopRounded: borderRadius.bottom,
+          trainingIcon: Image.asset(
+            "assets/informative/cerrar-sesion.png",
+            width: 9.h,
+          ),
+          trailiingIcon: const SizedBox(),
+          label: "Cerrar sesión",
+        ),
+      ],
+    ));
   }
 }
