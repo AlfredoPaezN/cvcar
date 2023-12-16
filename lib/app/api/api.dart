@@ -1,5 +1,4 @@
 import 'package:cvcar_mobile/app/api/api_routes.dart';
-import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/handle_error.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';

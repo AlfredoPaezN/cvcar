@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
+import 'package:cvcar_mobile/app/global/custom_indicator.dart';
 import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -215,45 +216,12 @@ class DashboardView extends GetView<DashboardController> {
                               ),
                               Expanded(
                                   flex: 2,
-                                  child: Center(
-                                    child: Container(
-                                      width: 70.h,
-                                      height: 15.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Color(CVCarColors.greyLight),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Container(
-                                            width: 9.h,
-                                            height: 9.h,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              // borderRadius: BorderRadius.circular(4),
-                                              color:
-                                                  controller.categories[index]
-                                                              ['status'] !=
-                                                          "Vigente"
-                                                      ? const Color(
-                                                          CVCarColors.inactive)
-                                                      : const Color(
-                                                          CVCarColors.active),
-                                            ),
-                                          ),
-                                          Center(
-                                            child: Label(
-                                                label:
-                                                    controller.categories[index]
-                                                        ['status']!,
-                                                fontcolor: Colors.white,
-                                                sizeFont: 8.sp),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                  child: CustomIndicator(
+                                    isActive: controller.categories[index]
+                                            ['status'] ==
+                                        "Vigente",
+                                    status: controller.categories[index]
+                                        ['status']!,
                                   )),
                             ]),
                           ),

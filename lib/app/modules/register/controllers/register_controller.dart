@@ -11,6 +11,11 @@ class RegisterController extends GetxController {
   RxBool isPasswordVisible = false.obs;
   RxBool isConfirmPasswordVisible = false.obs;
 
+  GlobalKey<FormState> formRegister = GlobalKey<FormState>();
+  bool isValidFormCreateDriverOne() {
+    return formRegister.currentState!.validate();
+  }
+
   List<DropdownMenuItem<String>> documenTypeItemList = [
     const DropdownMenuItem(
       child: Text('Cédula de ciudadanía'),

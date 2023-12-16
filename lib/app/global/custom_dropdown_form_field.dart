@@ -44,6 +44,7 @@ class CustomDropdownFormField extends StatelessWidget {
         onChanged: (e) {
           onChanged(e);
         },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         selectedItemBuilder: enableBorder
             ? null
             : (BuildContext context) {
@@ -73,7 +74,21 @@ class CustomDropdownFormField extends StatelessWidget {
             fontSize: 14.sp,
             overflow: TextOverflow.ellipsis,
           ),
+          errorStyle: TextStyle(
+            color: Colors.transparent,
+            fontSize: 0.sp,
+            height: 1,
+          ),
           prefixIcon: icon,
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(4.r),
+            ),
+            borderSide: BorderSide(
+              width: 1,
+              color: validator == null ? Colors.grey.shade300 : Colors.orange,
+            ),
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(4.r),

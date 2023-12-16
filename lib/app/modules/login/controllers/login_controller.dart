@@ -5,7 +5,14 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   final emailController = TextEditingController().obs;
   final passController = TextEditingController().obs;
-  RxBool isPasswordVisible = false.obs;
+  RxBool isPasswordObscured = true.obs;
+
+  GlobalKey<FormState> formLogin = GlobalKey<FormState>();
+  Rx<bool> isLoading = false.obs;
+
+  // AuthService authService;
+  // AuthController authController;
+  // LoginController({required this.authController, required this.authService});
 
   @override
   void onInit() {
@@ -22,11 +29,15 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
+  bool isValidFormCreateDriverOne() {
+    return formLogin.currentState!.validate();
+  }
+
   seePassword() {
-    return isPasswordVisible.value
+    return isPasswordObscured.value
         ? IconButton(
             onPressed: () {
-              isPasswordVisible.value = false;
+              isPasswordObscured.value = false;
             },
             icon: const Icon(
               Icons.visibility,
@@ -34,7 +45,7 @@ class LoginController extends GetxController {
             ))
         : IconButton(
             onPressed: () {
-              isPasswordVisible.value = true;
+              isPasswordObscured.value = true;
             },
             icon: const Icon(
               Icons.visibility_off,
@@ -42,4 +53,15 @@ class LoginController extends GetxController {
             ),
           );
   }
+
+  // Future<void> login() async {
+  //   isLoading.value = true;
+  //   bool loginStatus = await authController.login();
+  //   if (loginStatus) {
+  //     await authController.getUserProfile();
+
+  //     Get.offNamed(Routes.APP_NAVIGATION);
+  //   }
+  //   isLoading.value = false;
+  // }
 }

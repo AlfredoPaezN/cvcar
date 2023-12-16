@@ -6,6 +6,7 @@ import 'package:cvcar_mobile/app/global/custom_dropdown_form_field.dart';
 import 'package:cvcar_mobile/app/global/custom_text_form_field.dart';
 import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
+import 'package:cvcar_mobile/app/utils/forms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -79,57 +80,72 @@ class RegisterView extends GetView<RegisterController> {
               SizedBox(
                 height: 18.h,
               ),
-              CustomDropdownFormField(
-                items: controller.documenTypeItemList,
-                hint: 'Tipo de documento',
-                enabled: true,
-                onChanged: (value) {
-                  print("value $value");
-                  controller.documenType.value.text = value.toString();
-                },
-                value: controller.documenType.value.text.isNotEmpty
-                    ? controller.documenType.value.text
-                    : null,
-              ),
-
-              SizedBox(
-                height: 10.h,
-              ),
-              CustomTextFormField(
-                  controller: controller.documenNumber.value,
-                  hintText: 'Numero de documento',
-                  textInputType: TextInputType.number,
-                  // obscureText: controller.isPasswordVisible.value,
-                  // suffixIcon: controller.seePassword(),
-                  enabled: true),
-              SizedBox(
-                height: 10.h,
-              ),
-              CustomTextFormField(
-                  controller: controller.emailController.value,
-                  hintText: 'Correo electrónico',
-                  textInputType: TextInputType.emailAddress,
-                  enabled: true),
-              SizedBox(
-                height: 10.h,
-              ),
-              CustomTextFormField(
-                  controller: controller.passController.value,
-                  hintText: 'Contraseña',
-                  textInputType: TextInputType.emailAddress,
-                  obscureText: controller.isPasswordVisible.value,
-                  suffixIcon: controller.seePassword(),
-                  enabled: true),
-              SizedBox(
-                height: 10.h,
-              ),
-              CustomTextFormField(
-                  controller: controller.confirmPassController.value,
-                  hintText: 'Confirmar contraseña',
-                  textInputType: TextInputType.emailAddress,
-                  obscureText: controller.isConfirmPasswordVisible.value,
-                  suffixIcon: controller.seeConfirmPassword(),
-                  enabled: true),
+              Form(
+                  key: controller.formRegister,
+                  child: Column(
+                    children: [
+                      CustomDropdownFormField(
+                        validator: validateNotEmpty,
+                        items: controller.documenTypeItemList,
+                        hint: 'Tipo de documento',
+                        enabled: true,
+                        onChanged: (value) {
+                          print("value $value");
+                          controller.documenType.value.text = value.toString();
+                        },
+                        value: controller.documenType.value.text.isNotEmpty
+                            ? controller.documenType.value.text
+                            : null,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextFormField(
+                          validator: validateNotEmpty,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: controller.documenNumber.value,
+                          hintText: 'Numero de documento',
+                          textInputType: TextInputType.number,
+                          // obscureText: controller.isPasswordVisible.value,
+                          // suffixIcon: controller.seePassword(),
+                          enabled: true),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextFormField(
+                          validator: validateEmail,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: controller.emailController.value,
+                          hintText: 'Correo electrónico',
+                          textInputType: TextInputType.emailAddress,
+                          enabled: true),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextFormField(
+                          validator: validatePassword,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: controller.passController.value,
+                          hintText: 'Contraseña',
+                          textInputType: TextInputType.emailAddress,
+                          obscureText: controller.isPasswordVisible.value,
+                          suffixIcon: controller.seePassword(),
+                          enabled: true),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomTextFormField(
+                          validator: validatePassword,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: controller.confirmPassController.value,
+                          hintText: 'Confirmar contraseña',
+                          textInputType: TextInputType.emailAddress,
+                          obscureText:
+                              controller.isConfirmPasswordVisible.value,
+                          suffixIcon: controller.seeConfirmPassword(),
+                          enabled: true),
+                    ],
+                  )),
 
               const SizedBox(
                 height: 14,
@@ -142,7 +158,9 @@ class RegisterView extends GetView<RegisterController> {
                   color: Color(CVCarColors.secondaryColor),
                   label: "Registrarme",
                   action: () {
-                    Get.offAndToNamed(Routes.REGISTER_VEHICLE);
+                    if (controller.formRegister.currentState!.validate()) {
+                      Get.toNamed(Routes.REGISTER_VEHICLE);
+                    }
                   }),
               // const IndicatorDivisor(),
               SizedBox(

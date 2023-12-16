@@ -126,7 +126,7 @@ class CustomTextFormField extends StatelessWidget {
                 width: 1,
                 color: readOnly && validator == null
                     ? Colors.grey.shade300
-                    : Colors.red,
+                    : Colors.orange,
               ),
             ),
             enabledBorder: OutlineInputBorder(

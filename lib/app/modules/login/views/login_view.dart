@@ -1,10 +1,10 @@
 import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_button.dart';
-import 'package:cvcar_mobile/app/global/custom_divider.dart';
 import 'package:cvcar_mobile/app/global/custom_text_form_field.dart';
 import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
+import 'package:cvcar_mobile/app/utils/forms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -64,22 +64,40 @@ class LoginView extends GetView<LoginController> {
             SizedBox(
               height: 18.h,
             ),
-            CustomTextFormField(
-                controller: controller.emailController.value,
-                hintText: 'Correo electrónico',
-                textInputType: TextInputType.emailAddress,
-                enabled: true),
-            SizedBox(
-              height: 10.h,
-            ),
             Obx(
-              () => CustomTextFormField(
-                  controller: controller.passController.value,
-                  hintText: 'Contraseña',
-                  textInputType: TextInputType.emailAddress,
-                  obscureText: controller.isPasswordVisible.value,
-                  suffixIcon: controller.seePassword(),
-                  enabled: true),
+              () => Form(
+                  key: controller.formLogin,
+                  child: Column(
+                    children: [
+                      Column(
+                        children: [
+                          CustomTextFormField(
+                              validator: validateEmail,
+                              controller: controller.emailController.value,
+                              hintText: 'Correo electrónico',
+                              textInputType: TextInputType.emailAddress,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              enabled: true),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Obx(
+                        () => CustomTextFormField(
+                            validator: validatePassword,
+                            controller: controller.passController.value,
+                            hintText: 'Contraseña',
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            textInputType: TextInputType.emailAddress,
+                            obscureText: controller.isPasswordObscured.value,
+                            suffixIcon: controller.seePassword(),
+                            enabled: true),
+                      ),
+                    ],
+                  )),
             ),
 
             const SizedBox(
@@ -105,13 +123,15 @@ class LoginView extends GetView<LoginController> {
                 color: Color(CVCarColors.secondaryColor),
                 label: "Iniciar sesión",
                 action: () {
-                  Get.offAndToNamed(Routes.REGISTER_VEHICLE);
+                  controller.formLogin.currentState!.validate()
+                      ? Get.offAndToNamed(Routes.REGISTER_VEHICLE)
+                      : print('error');
                 }),
             // const IndicatorDivisor(),
             SizedBox(
               height: 43,
             ),
-            const CustomDivider(),
+            // const CustomDivider(),
             const SizedBox(
               height: 30,
             ),
