@@ -23,8 +23,8 @@ class DashboardController extends GetxController {
       "status": "Configurar",
     },
     {
-      "image": "assets/categories/kitdecarretera.png",
-      "title": "Kit de carretera",
+      "image": "assets/categories/baterias.png",
+      "title": "Bateria",
       "status": "Configurar",
     },
   ];

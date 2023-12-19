@@ -108,26 +108,26 @@ class LicenseDetail extends StatelessWidget {
               color: Color(CVCarColors.primaryColor),
             ),
             child: Column(children: [
-              for (var entry in controller.exampleLicense.toJson().entries)
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Description(
-                        label: entry.key,
-                        sizeFont: 11.h,
-                        color: Color(CVCarColors.greyLight),
-                        // color: Colors.white,
-                      ),
-                      Label(
-                        label: entry.value,
-                        sizeFont: 11.h,
-                        // color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
+              // for (var entry in controller.exampleLicense.toJson().entries)
+              //   Padding(
+              //     padding: EdgeInsets.symmetric(vertical: 4.0.h),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Description(
+              //           label: entry.key,
+              //           sizeFont: 11.h,
+              //           color: Color(CVCarColors.greyLight),
+              //           // color: Colors.white,
+              //         ),
+              //         Label(
+              //           label: entry.value,
+              //           sizeFont: 11.h,
+              //           // color: Colors.white,
+              //         ),
+              //       ],
+              //     ),
+              //   ),
             ]),
           ),
         ],
@@ -172,26 +172,26 @@ class VehicleDetail extends StatelessWidget {
               color: Color(CVCarColors.primaryColor),
             ),
             child: Column(children: [
-              for (var entry in controller.exampleData.toJson().entries)
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Description(
-                        label: entry.key,
-                        sizeFont: 11.h,
-                        color: Color(CVCarColors.greyLight),
-                        // color: Colors.white,
-                      ),
-                      Label(
-                        label: entry.value,
-                        sizeFont: 11.h,
-                        // color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
+              // for (var entry in controller.exampleData.toJson().entries)
+              //   Padding(
+              //     padding: EdgeInsets.symmetric(vertical: 4.0.h),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Description(
+              //           label: entry.key,
+              //           sizeFont: 11.h,
+              //           color: Color(CVCarColors.greyLight),
+              //           // color: Colors.white,
+              //         ),
+              //         Label(
+              //           label: entry.value,
+              //           sizeFont: 11.h,
+              //           // color: Colors.white,
+              //         ),
+              //       ],
+              //     ),
+              //   ),
             ]),
           ),
         ],

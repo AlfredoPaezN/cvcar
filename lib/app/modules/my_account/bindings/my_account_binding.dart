@@ -6,7 +6,9 @@ class MyAccountBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<MyAccountController>(
-      () => MyAccountController(),
+      () => MyAccountController(
+        authController: Get.find(),
+      ),
     );
   }
 }

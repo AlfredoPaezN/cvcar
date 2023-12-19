@@ -1,3 +1,5 @@
+import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +12,8 @@ class LoginController extends GetxController {
   GlobalKey<FormState> formLogin = GlobalKey<FormState>();
   Rx<bool> isLoading = false.obs;
 
-  // AuthService authService;
-  // AuthController authController;
-  // LoginController({required this.authController, required this.authService});
+  AuthController authController;
+  LoginController({required this.authController});
 
   @override
   void onInit() {
@@ -54,14 +55,13 @@ class LoginController extends GetxController {
           );
   }
 
-  // Future<void> login() async {
-  //   isLoading.value = true;
-  //   bool loginStatus = await authController.login();
-  //   if (loginStatus) {
-  //     await authController.getUserProfile();
+  Future<void> login() async {
+    isLoading.value = true;
+    if (formLogin.currentState!.validate()) {
+      await authController.login(
+          emailController.value.text, passController.value.text);
+    }
 
-  //     Get.offNamed(Routes.APP_NAVIGATION);
-  //   }
-  //   isLoading.value = false;
-  // }
+    isLoading.value = false;
+  }
 }

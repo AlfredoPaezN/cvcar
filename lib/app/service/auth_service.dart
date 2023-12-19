@@ -1,4 +1,5 @@
 import 'package:cvcar_mobile/app/api/api.dart';
+import 'package:cvcar_mobile/app/models/data.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {
@@ -6,8 +7,8 @@ class AuthService extends GetxService {
 
   AuthService({required this.apiClient});
 
-  Future<void> login() async {
-    await apiClient.login();
+  Future<Response> login(String email, String pass) async {
+    return await apiClient.login(email, pass);
   }
 
   Future<void> logout(String idToken) async {

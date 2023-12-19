@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../controllers/dashboard_controller.dart';
 
@@ -61,7 +62,9 @@ class DashboardView extends GetView<DashboardController> {
               OptionShort(
                 label: 'CV del vehículo',
                 imagePath: "assets/informative/vehiculo.png",
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(Routes.VEHICLE_CV);
+                },
               ),
               SizedBox(
                 width: 10.w,
@@ -70,6 +73,9 @@ class DashboardView extends GetView<DashboardController> {
                 label: 'Detalles del vehículo',
                 imagePath: "assets/informative/detalles del vehículo.png",
                 onTap: () {
+                  GetStorage box = GetStorage();
+                  final token = box.read("access_token");
+                  print("token: $token");
                   Get.toNamed(Routes.VEHICLE_DETAIL);
                 },
               ),
@@ -79,98 +85,67 @@ class DashboardView extends GetView<DashboardController> {
         SizedBox(
           height: 18.h,
         ),
-        FadeInRight(
-          child: SizedBox(
-            height: 100.h,
-            child: ListView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                children: [
-                  OptionWithBody(
-                      label: 'Kilometraje',
-                      body: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Label(
-                              label: '0 km',
-                              fontcolor: Colors.white,
-                              sizeFont: 20.sp),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Label(
-                              label: '12/12/2021',
-                              fontcolor: Colors.white,
-                              sizeFont: 10.sp),
-                          Description(
-                            label: "Último registro",
-                            sizeFont: 7.5.sp,
-                            color: Colors.white,
-                          )
-                        ],
-                      )),
-                  const OptionWithBody(
-                      label: 'Combustible',
-                      body: Expanded(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Tile(
-                                label: 'Fecha',
-                                description: 'DD/MM/AA',
-                              ),
-                              Tile(
-                                label: 'Cantidad',
-                                description: '0gl',
-                              ),
-                              Tile(
-                                label: 'Precio',
-                                description: '0COP',
-                              )
-                            ]),
-                      )),
-                  const OptionWithBody(
-                      label: 'Lavados',
-                      body: Expanded(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Tile(
-                                label: 'Empresa',
-                                description: 'Lavado SAS',
-                              ),
-                              Tile(
-                                label: 'Fecha',
-                                description: 'DD/MM/AA',
-                              ),
-                              Tile(
-                                label: 'Precio',
-                                description: '0COP',
-                              )
-                            ]),
-                      )),
-                  const OptionWithBody(
-                      label: 'Mantenimientto',
-                      body: Expanded(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Tile(
-                                label: 'Empresa',
-                                description: 'Manten...',
-                              ),
-                              Tile(
-                                label: 'Fecha',
-                                description: 'DD/MM/AA',
-                              ),
-                              Tile(
-                                label: 'Precio',
-                                description: '0COP',
-                              )
-                            ]),
-                      )),
-                ]),
-          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Row(children: [
+            Expanded(
+              child: OptionWithBody(
+                  label: 'Kilometraje',
+                  edit: true,
+                  body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Label(
+                          label: '0 km',
+                          fontcolor: Colors.white,
+                          sizeFont: 20.sp),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Label(
+                          label: '12/12/2021',
+                          fontcolor: Colors.white,
+                          sizeFont: 10.sp),
+                      Description(
+                        label: "Último registro",
+                        sizeFont: 7.5.sp,
+                        color: Colors.white,
+                      )
+                    ],
+                  )),
+            ),
+            SizedBox(
+              width: 10.w,
+            ),
+            Expanded(
+              child: OptionWithBody(
+                  label: 'Kilometraje',
+                  body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset('assets/categories/monetizacion.png'),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Description(
+                        label: "Costos diarios",
+                        sizeFont: 9.sp,
+                        color: Colors.white,
+                      ),
+                      Description(
+                        label: "Costos Mensuales",
+                        sizeFont: 9.sp,
+                        color: Colors.white,
+                      ),
+                      Label(
+                        label: 'Costos Anuales',
+                        fontcolor: Colors.white,
+                        sizeFont: 9.sp,
+                      ),
+                    ],
+                  )),
+            ),
+          ]),
         ),
         SizedBox(
           height: 18.h,
@@ -277,60 +252,61 @@ class OptionWithBody extends StatelessWidget {
     Key? key,
     required this.label,
     required this.body,
+    this.edit = false,
   }) : super(key: key);
 
   final String label;
   final Widget body;
+  final bool edit;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 25),
-      child: Container(
-        width: 120.h,
-        height: 50.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          color: Color(CVCarColors.primaryColor),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: Color(CVCarColors.primaryColor),
+      ),
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Label(
-                      label: label,
-                      // fontcolor: Colors.black,
-                      sizeFont: 10.sp),
-                  const Expanded(child: SizedBox()),
-                  Container(
-                    width: 15.h,
-                    height: 15.h,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      // borderRadius: BorderRadius.circular(4),
-                      color: Color(CVCarColors.greyLight),
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        size: 15,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
+              Label(
+                  label: label,
+                  // fontcolor: Colors.black,
+                  sizeFont: 10.sp),
+              const Expanded(child: SizedBox()),
+              Container(
+                width: 15.h,
+                height: 15.h,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  // borderRadius: BorderRadius.circular(4),
+                  color: Color(CVCarColors.greyLight),
+                ),
+                child: Center(
+                  child: edit
+                      ? const Icon(
+                          Icons.edit,
+                          size: 15,
+                          color: Colors.white,
+                        )
+                      : const Icon(
+                          Icons.add,
+                          size: 15,
+                          color: Colors.white,
+                        ),
+                ),
               ),
-              SizedBox(
-                height: 8.h,
-              ),
-              body,
             ],
           ),
-        ),
+          SizedBox(
+            height: 8.h,
+          ),
+          body,
+        ],
       ),
     );
   }

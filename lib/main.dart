@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Roboto',
             scaffoldBackgroundColor: const Color(CVCarColors.backgroundColor)),
         themeMode: ThemeMode.dark,
-        initialRoute: Routes.APP_NAVIGATION,
+        initialRoute: Routes.LOGIN,
         getPages: AppPages.routes,
       ),
     );

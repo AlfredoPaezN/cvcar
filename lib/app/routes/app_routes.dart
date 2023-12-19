@@ -14,6 +14,7 @@ abstract class Routes {
   static const RESERVATIONS = _Paths.RESERVATIONS;
   static const MY_ACCOUNT = _Paths.MY_ACCOUNT;
   static const VEHICLE_DETAIL = _Paths.VEHICLE_DETAIL;
+  static const VEHICLE_CV = _Paths.VEHICLE_CV;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const RESERVATIONS = '/reservations';
   static const MY_ACCOUNT = '/my-account';
   static const VEHICLE_DETAIL = '/vehicle-detail';
+  static const VEHICLE_CV = '/vehicle-cv';
 }

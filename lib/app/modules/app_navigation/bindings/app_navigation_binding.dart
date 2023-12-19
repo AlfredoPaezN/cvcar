@@ -1,6 +1,10 @@
 import 'package:cvcar_mobile/app/api/api.dart';
+import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
 import 'package:cvcar_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:cvcar_mobile/app/modules/my_account/controllers/my_account_controller.dart';
 import 'package:cvcar_mobile/app/modules/pit_area/controllers/pit_area_controller.dart';
+import 'package:cvcar_mobile/app/service/auth_service.dart';
+import 'package:cvcar_mobile/app/service/user_service.dart';
 import 'package:get/get.dart';
 
 import '../controllers/app_navigation_controller.dart';
@@ -10,6 +14,17 @@ class AppNavigationBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => ApiClient());
     Get.lazyPut(() => DashboardController());
+    Get.lazyPut(() => AuthService(
+          apiClient: Get.find(),
+        ));
+    Get.lazyPut(() => AuthController(
+          userService: Get.find(),
+          authService: Get.find(),
+        ));
+    Get.lazyPut(() => MyAccountController(
+          authController: Get.find(),
+        ));
+    Get.lazyPut(() => UserService(apiClient: Get.find()));
     Get.lazyPut(() => PitAreaController());
 
     Get.lazyPut<AppNavigationController>(

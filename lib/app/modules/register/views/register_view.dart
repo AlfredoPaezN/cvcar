@@ -4,7 +4,6 @@ import 'package:cvcar_mobile/app/global/custom_button.dart';
 import 'package:cvcar_mobile/app/global/custom_divider.dart';
 import 'package:cvcar_mobile/app/global/custom_dropdown_form_field.dart';
 import 'package:cvcar_mobile/app/global/custom_text_form_field.dart';
-import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:cvcar_mobile/app/utils/forms.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +127,7 @@ class RegisterView extends GetView<RegisterController> {
                           controller: controller.passController.value,
                           hintText: 'Contraseña',
                           textInputType: TextInputType.emailAddress,
-                          obscureText: controller.isPasswordVisible.value,
+                          obscureText: controller.isPasswordObscure.value,
                           suffixIcon: controller.seePassword(),
                           enabled: true),
                       SizedBox(
@@ -141,7 +140,7 @@ class RegisterView extends GetView<RegisterController> {
                           hintText: 'Confirmar contraseña',
                           textInputType: TextInputType.emailAddress,
                           obscureText:
-                              controller.isConfirmPasswordVisible.value,
+                              controller.isConfirmPasswordObscure.value,
                           suffixIcon: controller.seeConfirmPassword(),
                           enabled: true),
                     ],
@@ -158,9 +157,7 @@ class RegisterView extends GetView<RegisterController> {
                   color: Color(CVCarColors.secondaryColor),
                   label: "Registrarme",
                   action: () {
-                    if (controller.formRegister.currentState!.validate()) {
-                      Get.toNamed(Routes.REGISTER_VEHICLE);
-                    }
+                    controller.register();
                   }),
               // const IndicatorDivisor(),
               SizedBox(

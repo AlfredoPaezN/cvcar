@@ -1,8 +1,8 @@
-import 'package:cvcar_mobile/app/models/licence.dart';
-import 'package:cvcar_mobile/app/models/vehicle.dart';
 import 'package:get/get.dart';
 
-class VehicleDetailController extends GetxController {
+class VehicleCvController extends GetxController {
+  RxBool isExpanded = false.obs;
+
   @override
   void onInit() {
     super.onInit();

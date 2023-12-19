@@ -78,7 +78,7 @@ class CustomTextFormField extends StatelessWidget {
           inputFormatters: inputFormatters,
           enabled: enabled,
           autofocus: autofocus ?? false,
-          cursorColor: const Color(CVCarColors.primaryColor),
+          cursorColor: const Color(CVCarColors.secondaryColor),
           readOnly: readOnly,
           showCursor: showCursor,
           obscureText: obscureText,

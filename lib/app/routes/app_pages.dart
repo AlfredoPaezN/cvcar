@@ -20,6 +20,8 @@ import '../modules/reservations/bindings/reservations_binding.dart';
 import '../modules/reservations/views/reservations_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/vehicle_cv/bindings/vehicle_cv_binding.dart';
+import '../modules/vehicle_cv/views/vehicle_cv_view.dart';
 import '../modules/vehicle_detail/bindings/vehicle_detail_binding.dart';
 import '../modules/vehicle_detail/views/vehicle_detail_view.dart';
 
@@ -92,6 +94,11 @@ class AppPages {
       binding: VehicleDetailBinding(),
       transitionDuration: const Duration(milliseconds: 200),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.VEHICLE_CV,
+      page: () => const VehicleCvView(),
+      binding: VehicleCvBinding(),
     ),
   ];
 }

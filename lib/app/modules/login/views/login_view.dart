@@ -121,11 +121,11 @@ class LoginView extends GetView<LoginController> {
             ),
             CustomButton(
                 color: Color(CVCarColors.secondaryColor),
-                label: "Iniciar sesión",
+                label: controller.isLoading.value
+                    ? "Loading..."
+                    : "Iniciar sesión",
                 action: () {
-                  controller.formLogin.currentState!.validate()
-                      ? Get.offAndToNamed(Routes.REGISTER_VEHICLE)
-                      : print('error');
+                  controller.login();
                 }),
             // const IndicatorDivisor(),
             SizedBox(

@@ -2,19 +2,19 @@ import 'dart:convert';
 
 import 'package:cvcar_mobile/app/api/api.dart';
 import 'package:cvcar_mobile/app/api/api_routes.dart';
-import 'package:cvcar_mobile/app/models/user.dart';
+import 'package:cvcar_mobile/app/models/register_user.dart';
 import 'package:cvcar_mobile/app/utils/handle_error.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 class UserService extends GetxController {
   ApiClient apiClient;
   UserService({required this.apiClient});
 
-  Future<User?> getUserProfile() async {
-    Response? response = await apiClient.getData(ApiRoutes.USER_PROFILE);
-    return response.body != null ? User.fromJson(response.body) : null;
-  }
+  // Future<User?> getUserProfile() async {
+  //   Response? response = await apiClient.getData(ApiRoutes.USER_PROFILE);
+  //   return response.body != null ? User.fromJson(response.body) : null;
+  // }
 
   Future<Map<String, dynamic>> getUserPermission() async {
     try {
@@ -27,6 +27,20 @@ class UserService extends GetxController {
       handleError(e, s);
     }
     return {};
+  }
+
+  Future<Response?> createUser(RegisterUser user) async {
+    print(
+        "ApiRoutes.CREATE_USER: ${ApiRoutes.PROD_BASE_URL}${ApiRoutes.CREATE_USER}");
+    try {
+      Response response = await apiClient.postData(
+          "${ApiRoutes.PROD_BASE_URL}${ApiRoutes.CREATE_USER}", user.toJson());
+      print("response.body: ${response.body}");
+      return response;
+    } catch (e, s) {
+      handleError(e, s);
+    }
+    return null;
   }
 
   // Future<http.Response?> deleteUserAccount() async {
@@ -45,9 +59,9 @@ class UserService extends GetxController {
   //   return response;
   // }
 
-  Future<Response> updateUserProfile(User user) async {
-    Response response =
-        await apiClient.postData(ApiRoutes.USER_PROFILE, user.toJson());
-    return response;
-  }
+  // Future<Response> updateUserProfile(User user) async {
+  //   Response response =
+  //       await apiClient.postData(ApiRoutes.USER_PROFILE, user.toJson());
+  //   return response;
+  // }
 }

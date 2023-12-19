@@ -74,7 +74,8 @@ class MyAccountView extends GetView<MyAccountController> {
               "assets/informative/editar.png",
               width: 25.h,
             ),
-            label: "Andrea Daguer",
+            label:
+                "${controller.authController.userData.value?.firstName ?? ""} ${controller.authController.userData.value?.lastName ?? ""}",
           ),
           SizedBox(
             height: 10.h,
@@ -88,7 +89,7 @@ class MyAccountView extends GetView<MyAccountController> {
               "assets/informative/editar.png",
               width: 25.h,
             ),
-            label: "andreadaguer@gmail.com",
+            label: controller.authController.userData.value?.email ?? "",
           ),
           SizedBox(
             height: 10.h,
@@ -102,7 +103,8 @@ class MyAccountView extends GetView<MyAccountController> {
               "assets/informative/editar.png",
               width: 25.h,
             ),
-            label: "301 627 6346",
+            label: controller.authController.userData.value?.phone ??
+                "No registra",
           ),
           SizedBox(
             height: 20.h,

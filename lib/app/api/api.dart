@@ -1,4 +1,6 @@
 import 'package:cvcar_mobile/app/api/api_routes.dart';
+import 'package:cvcar_mobile/app/models/data.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/handle_error.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
@@ -38,32 +40,19 @@ class ApiClient extends GetConnect implements GetxService {
       return request;
     });
 
-    // httpClient.addAuthenticator((Request request) async {
-    //   //Authenticates one user
-    //   final refreshToken = box.read('refresh_token');
-    //   //if the token expired give me a new one
+    httpClient.addAuthenticator((Request request) async {
+      try {
+        final token = box.read('access_token');
+        // Set the header
+        request.headers['Authorization'] = "Bearer $token";
+      } catch (e, stackTrace) {
+        handleError(e, stackTrace);
+        box.remove('access_token');
+        Get.offNamed(Routes.LOGIN);
+      }
 
-    //   try {
-    //     Map<String, dynamic> credentials =
-    //         await authClient.refreshToken(refreshToken);
-    //     box.write('access_token', credentials['accessToken']);
-    //     box.write('id_token', credentials['idToken']);
-    //     box.write('refresh_token', credentials['refreshToken']);
-    //     box.write('user_details', credentials['userDetails']);
-    //     // Set the header
-    //     request.headers['Authorization'] =
-    //         "Bearer ${credentials['accessToken']}";
-    //   } catch (e, stackTrace) {
-    //     handleError(e, stackTrace);
-    //     box.remove('access_token');
-    //     box.remove('id_token');
-    //     box.remove('refresh_token');
-    //     box.remove('user_details');
-    //     Get.offNamed(Routes.LOGIN);
-    //   }
-
-    //   return request;
-    // });
+      return request;
+    });
 
     //Authenticator will be called 3 times if HttpStatus is
     //HttpStatus.unauthorized
@@ -101,6 +90,7 @@ class ApiClient extends GetConnect implements GetxService {
   Future<Response> postData(url, [body]) async {
     Response? response;
     try {
+      print("url: $url");
       response = await post(url, body);
       return response;
     } catch (e, stackTrace) {
@@ -177,20 +167,26 @@ class ApiClient extends GetConnect implements GetxService {
     }
   }
 
-  Future<void> login() async {
-    // Map<String, dynamic> credentials = await authClient.login();
+  Future<Response> login(String email, String pass) async {
+    print({"email": email, "password": pass});
+    Response? response;
+    try {
+      response =
+          await post("${ApiRoutes.PROD_BASE_URL}${ApiRoutes.LOGIN_PATH}", {
+        "email": email,
+        "password": pass,
+      });
+      box.write('access_token', response.body['token']);
+      // print("object: ${response.body}");
 
-    // box.write('access_token', credentials['accessToken']);
-    // box.write('id_token', credentials['idToken']);
-    // box.write('refresh_token', credentials['refreshToken']);
-    // box.write('user_details', credentials['userDetails']);
+      return response;
+    } catch (e, stackTrace) {
+      handleError(e, stackTrace);
+      rethrow;
+    }
   }
 
   Future<void> logout(String idToken) async {
-    // await authClient.logout(idToken);
-    // box.remove('access_token');
-    // box.remove('id_token');
-    // box.remove('refresh_token');
-    // box.remove('user_details');
+    box.remove('access_token');
   }
 }
