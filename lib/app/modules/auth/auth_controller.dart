@@ -18,6 +18,8 @@ class AuthController extends GetxService {
   AuthService authService;
   UserService userService;
 
+  RxInt vehicleSelected = 0.obs;
+
   Rxn<User> user = Rxn<User>();
   Rxn<ImageProvider> driverImage = Rxn<ImageProvider>();
 

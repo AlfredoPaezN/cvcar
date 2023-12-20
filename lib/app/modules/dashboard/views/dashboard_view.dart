@@ -156,7 +156,7 @@ class DashboardView extends GetView<DashboardController> {
             child: ListView.builder(
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: controller.categories.length,
+              itemCount: controller.categories.value!.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: EdgeInsets.only(left: index == 0 ? 25 : 8.w),
@@ -177,35 +177,37 @@ class DashboardView extends GetView<DashboardController> {
                               borderRadius: BorderRadius.circular(4),
                               color: Color(CVCarColors.primaryColor),
                             ),
-                            child: Column(children: [
-                              Expanded(child: SizedBox()),
-                              Expanded(
-                                flex: 3,
-                                child: Center(
-                                  child: Label(
-                                      label: controller.categories[index]
-                                          ['title']!,
-                                      fontcolor: Colors.white,
-                                      sizeFont: 15.sp),
+                            child: Obx(
+                              () => Column(children: [
+                                Expanded(child: SizedBox()),
+                                Expanded(
+                                  flex: 3,
+                                  child: Center(
+                                    child: Label(
+                                        label: controller
+                                            .categories.value![index]['title']!,
+                                        fontcolor: Colors.white,
+                                        sizeFont: 15.sp),
+                                  ),
                                 ),
-                              ),
-                              Expanded(
-                                  flex: 2,
-                                  child: CustomIndicator(
-                                    isActive: controller.categories[index]
-                                            ['status'] ==
-                                        "Vigente",
-                                    status: controller.categories[index]
-                                        ['status']!,
-                                  )),
-                            ]),
+                                Expanded(
+                                    flex: 2,
+                                    child: CustomIndicator(
+                                      isActive: controller.categories
+                                              .value![index]['status'] ==
+                                          "Vigente",
+                                      status: controller
+                                          .categories.value![index]['status']!,
+                                    )),
+                              ]),
+                            ),
                           ),
                         ),
                         Positioned(
                             top: 0,
                             left: 27.5.h,
                             child: Image.asset(
-                              controller.categories[index]['image']!,
+                              controller.categories.value![index]['image']!,
                             ),
                             width: 35.h),
                       ],

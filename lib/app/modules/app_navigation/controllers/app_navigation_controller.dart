@@ -1,8 +1,11 @@
+import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class AppNavigationController extends GetxController {
+  AuthController authController;
+  AppNavigationController({required this.authController});
   PersistentTabController tabController =
       PersistentTabController(initialIndex: 0);
 
@@ -11,23 +14,30 @@ class AppNavigationController extends GetxController {
 
   final vehiclesAssigned = TextEditingController().obs;
 
-  List<DropdownMenuItem<String>> availableVehicles = [
-    const DropdownMenuItem(
-      child: Text('Mazda Allegro'),
-      value: 'Mazda Allegro',
-    ),
-    const DropdownMenuItem(
-      child: Text('Mazda 3'),
-      value: 'Mazda 3',
-    ),
-    const DropdownMenuItem(
-      child: Text('+ Agregar nuevo vehículo'),
-      value: '+ Agregar nuevo vehículo',
-    ),
-  ];
+  Rxn<List<DropdownMenuItem<String>>> availableVehicles =
+      Rxn<List<DropdownMenuItem<String>>>();
 
   @override
   void onInit() {
+    availableVehicles.value = [
+      ...authController.vehiclesData.value?.map((e) {
+            return DropdownMenuItem(
+              child: Text(e.brand!.name +
+                  ' ' +
+                  e.modelYear.toString() +
+                  ' ' +
+                  e.plate!),
+              value:
+                  e.brand!.name + ' ' + e.modelYear.toString() + ' ' + e.plate!,
+            );
+          }).toList() ??
+          [],
+      const DropdownMenuItem(
+        child: Text('+ Agregar nuevo vehículo'),
+        value: '+ Agregar nuevo vehículo',
+      ),
+    ];
+
     super.onInit();
   }
 

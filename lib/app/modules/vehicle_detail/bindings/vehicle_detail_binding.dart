@@ -6,7 +6,9 @@ class VehicleDetailBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<VehicleDetailController>(
-      () => VehicleDetailController(),
+      () => VehicleDetailController(
+        authController: Get.find(),
+      ),
     );
   }
 }

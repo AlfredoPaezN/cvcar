@@ -40,13 +40,18 @@ class AppNavigationView extends GetView<AppNavigationController> {
                 Obx(
                   () => CustomDropdownFormField(
                     width: 200.w,
-                    items: controller.availableVehicles,
+                    items: controller.availableVehicles.value!,
                     // hint: 'Tipo de documento',
                     enableBorder: false,
                     onChanged: (value) {
                       if (value == '+ Agregar nuevo vehículo') {
                         Get.toNamed(Routes.REGISTER_VEHICLE);
                       } else {
+                        // if (value !=
+                        //     controller.availableVehicles.value!.first.value) {
+                        //   Get.offAndToNamed(Routes.APP_NAVIGATION);
+                        // }
+
                         controller.vehiclesAssigned.value.text =
                             value.toString();
                       }
@@ -54,7 +59,7 @@ class AppNavigationView extends GetView<AppNavigationController> {
 
                     value: controller.vehiclesAssigned.value.text.isNotEmpty
                         ? controller.vehiclesAssigned.value.text
-                        : controller.availableVehicles.first.value,
+                        : controller.availableVehicles.value!.first.value,
                   ),
                 )
               ],
