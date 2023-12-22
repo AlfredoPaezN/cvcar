@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CustomButton extends StatelessWidget {
   final Color color;
@@ -9,6 +10,7 @@ class CustomButton extends StatelessWidget {
   final Widget? prefixWidget;
   final Widget? sufixWidget;
   final Color? textColor;
+  final bool isLoading;
   const CustomButton(
       {required this.color,
       required this.label,
@@ -16,6 +18,7 @@ class CustomButton extends StatelessWidget {
       this.fontSize,
       Key? key,
       this.prefixWidget,
+      this.isLoading = false,
       this.sufixWidget,
       this.textColor});
 
@@ -36,14 +39,19 @@ class CustomButton extends StatelessWidget {
                 child: prefixWidget ?? Container(),
               ),
               Center(
-                child: Text(
-                  label,
-                  style: TextStyle(
-                      fontSize: fontSize ?? 14.h,
-                      color: textColor ?? Colors.white,
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
+                child: isLoading
+                    ? LoadingAnimationWidget.prograssiveDots(
+                        size: 40.sp,
+                        color: Colors.white,
+                      )
+                    : Text(
+                        label,
+                        style: TextStyle(
+                            fontSize: fontSize ?? 14.h,
+                            color: textColor ?? Colors.white,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
               ),
               Expanded(
                 child: sufixWidget ?? Container(),

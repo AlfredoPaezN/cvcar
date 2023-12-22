@@ -114,7 +114,7 @@ class RegisterView extends GetView<RegisterController> {
                       CustomTextFormField(
                           validator: validateEmail,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          controller: controller.emailController.value,
+                          controller: controller.emailControllerRegister.value,
                           hintText: 'Correo electrónico',
                           textInputType: TextInputType.emailAddress,
                           enabled: true),
@@ -124,7 +124,7 @@ class RegisterView extends GetView<RegisterController> {
                       CustomTextFormField(
                           validator: validatePassword,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          controller: controller.passController.value,
+                          controller: controller.passControllerRegister.value,
                           hintText: 'Contraseña',
                           textInputType: TextInputType.emailAddress,
                           obscureText: controller.isPasswordObscure.value,
@@ -156,6 +156,7 @@ class RegisterView extends GetView<RegisterController> {
               CustomButton(
                   color: Color(CVCarColors.secondaryColor),
                   label: "Registrarme",
+                  isLoading: controller.isLoading.value,
                   action: () {
                     controller.register();
                   }),

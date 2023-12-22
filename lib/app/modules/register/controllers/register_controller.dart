@@ -1,4 +1,5 @@
 import 'package:cvcar_mobile/app/models/register_user.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/service/user_service.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +9,14 @@ class RegisterController extends GetxController {
   UserService userService;
   RegisterController({required this.userService});
 
-  final emailController = TextEditingController().obs;
-  final passController = TextEditingController().obs;
+  final emailControllerRegister = TextEditingController().obs;
+  final passControllerRegister = TextEditingController().obs;
   final confirmPassController = TextEditingController().obs;
   final documenType = TextEditingController().obs;
   final documenNumber = TextEditingController().obs;
   RxBool isPasswordObscure = true.obs;
   RxBool isConfirmPasswordObscure = true.obs;
+  RxBool isLoading = false.obs;
 
   GlobalKey<FormState> formRegister = GlobalKey<FormState>();
   bool isValidFormCreateDriverOne() {
@@ -26,14 +28,14 @@ class RegisterController extends GetxController {
       child: Text('Cédula de ciudadanía'),
       value: 'CC',
     ),
-    const DropdownMenuItem(
-      child: Text('Cédula de extranjería'),
-      value: 'CE',
-    ),
-    const DropdownMenuItem(
-      child: Text('Pasaporte'),
-      value: 'PP',
-    ),
+    // const DropdownMenuItem(
+    //   child: Text('Cédula de extranjería'),
+    //   value: 'CE',
+    // ),
+    // const DropdownMenuItem(
+    //   child: Text('Pasaporte'),
+    //   value: 'PP',
+    // ),
     // const DropdownMenuItem(
     //   child: Text('Tarjeta de identidad'),
     // ),
@@ -105,6 +107,7 @@ class RegisterController extends GetxController {
   }
 
   void register() async {
+    isLoading.value = true;
     // User user = User(
     //     email: "alfredo123.apne@gmail.com",
     //     password: "12Febrero",
@@ -113,8 +116,8 @@ class RegisterController extends GetxController {
     //     documentType: "CC");
 
     RegisterUser user = RegisterUser(
-      email: emailController.value.text,
-      password: passController.value.text,
+      email: emailControllerRegister.value.text,
+      password: passControllerRegister.value.text,
       confirmPassword: confirmPassController.value.text,
       documentType: documenType.value.text,
       numberDocument: documenNumber.value.text,
@@ -123,10 +126,33 @@ class RegisterController extends GetxController {
 
     if (isValidFormCreateDriverOne()) {
       try {
-        await userService.createUser(user);
+        Response? response = await userService.createUser(user);
+        print("response.bodyr: ${response.toString()}");
+
+        if (response!.status.code! >= 200 && response.status.code! < 300) {
+          print("AQUI ENTRAAA");
+          isLoading.value = false;
+          Get.snackbar("Registro exitoso",
+              "Verifique su correo electrónico para poder ingresar",
+              backgroundColor: Colors.green,
+              colorText: Colors.white, onTap: (v) {
+            Get.offAllNamed(Routes.LOGIN);
+          });
+          Get.offAllNamed(Routes.LOGIN);
+        } else {
+          isLoading.value = false;
+          Get.snackbar(
+            "Error",
+            response.body["message"].toString(),
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+        }
       } catch (e) {
+        isLoading.value = false;
         print(e);
       }
     }
+    isLoading.value = false;
   }
 }

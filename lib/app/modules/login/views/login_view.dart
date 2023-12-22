@@ -121,6 +121,7 @@ class LoginView extends GetView<LoginController> {
             ),
             CustomButton(
                 color: Color(CVCarColors.secondaryColor),
+                isLoading: controller.isLoading.value,
                 label: controller.isLoading.value
                     ? "Loading..."
                     : "Iniciar sesión",
