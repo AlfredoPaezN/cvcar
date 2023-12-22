@@ -1,5 +1,4 @@
 import 'package:cvcar_mobile/app/global/custom_snack.dart';
-import 'package:cvcar_mobile/app/models/data.dart';
 import 'package:cvcar_mobile/app/models/driving.dart';
 import 'package:cvcar_mobile/app/models/register_user.dart';
 import 'package:cvcar_mobile/app/models/user.dart';

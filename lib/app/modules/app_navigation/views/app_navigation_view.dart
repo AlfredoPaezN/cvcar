@@ -47,6 +47,9 @@ class AppNavigationView extends GetView<AppNavigationController> {
                       if (value == '+ Agregar nuevo vehículo') {
                         Get.toNamed(Routes.REGISTER_VEHICLE);
                       } else {
+                        controller.authController.vehicleSelected.value =
+                            controller.availableVehicles.value!.indexWhere(
+                                (element) => element.value == value.toString());
                         // if (value !=
                         //     controller.availableVehicles.value!.first.value) {
                         //   Get.offAndToNamed(Routes.APP_NAVIGATION);

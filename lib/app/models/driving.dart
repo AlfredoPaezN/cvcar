@@ -13,6 +13,7 @@ class Driving {
   final String? inscriptionNumber;
   final DateTime? inscriptionDate;
   final bool? hasFines;
+  final List<Licence>? licences;
 
   Driving({
     this.id,
@@ -25,6 +26,7 @@ class Driving {
     this.inscriptionNumber,
     this.inscriptionDate,
     this.hasFines,
+    this.licences,
   });
 
   Driving copyWith({
@@ -38,6 +40,7 @@ class Driving {
     String? inscriptionNumber,
     DateTime? inscriptionDate,
     bool? hasFines,
+    List<Licence>? licences,
   }) =>
       Driving(
         id: id ?? this.id,
@@ -50,6 +53,7 @@ class Driving {
         inscriptionNumber: inscriptionNumber ?? this.inscriptionNumber,
         inscriptionDate: inscriptionDate ?? this.inscriptionDate,
         hasFines: hasFines ?? this.hasFines,
+        licences: licences ?? this.licences,
       );
 
   factory Driving.fromRawJson(String str) => Driving.fromJson(json.decode(str));
@@ -73,6 +77,10 @@ class Driving {
             ? null
             : DateTime.parse(json["inscriptionDate"]),
         hasFines: json["hasFines"],
+        licences: json["licences"] == null
+            ? []
+            : List<Licence>.from(
+                json["licences"]!.map((x) => Licence.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -87,5 +95,8 @@ class Driving {
         "inscriptionDate":
             "${inscriptionDate!.year.toString().padLeft(4, '0')}-${inscriptionDate!.month.toString().padLeft(2, '0')}-${inscriptionDate!.day.toString().padLeft(2, '0')}",
         "hasFines": hasFines,
+        "licences": licences == null
+            ? []
+            : List<dynamic>.from(licences!.map((x) => x.toJson())),
       };
 }

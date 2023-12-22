@@ -2,7 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_indicator.dart';
+import 'package:cvcar_mobile/app/global/expandable_item.dart';
 import 'package:cvcar_mobile/app/modules/reservations/views/reservations_view.dart';
+import 'package:cvcar_mobile/app/modules/vehicle_detail/views/vehicle_detail_view.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,6 +73,7 @@ class VehicleCvView extends GetView<VehicleCvController> {
                               MaterialTapTargetSize.shrinkWrap,
                           onChanged: (value) {
                             controller.isExpanded.value = value!;
+                            controller.cardIndexOpennedList.clear();
                           })),
                 ),
                 SizedBox(
@@ -86,49 +89,138 @@ class VehicleCvView extends GetView<VehicleCvController> {
             SizedBox(
               height: 15.h,
             ),
-            ShrinkCard(
-              title: "Kilometraje",
-              edit: true,
-            ),
-            ShrinkCard(
-              title: "Combustible",
-              edit: false,
-            ),
-            ShrinkCard(
-              title: "Lavados",
-              edit: false,
-            ),
-            ShrinkCard(
-              title: "Mantenimiento general",
-              edit: false,
-            ),
-            ShrinkCard(
-              title: "Cambio de aceite",
-              edit: false,
-            ),
-            ShrinkCard(
-              title: "SOAT",
-              edit: false,
-              indicator: const CustomIndicator(
-                isActive: true,
-                status: "Vigente",
+            Obx(
+              () => ExpandableItem(
+                title: "Kilometraje",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(0),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Último registro",
+                    description: "983km",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(0);
+                },
               ),
             ),
-            ShrinkCard(
-              title: "Tecnomecánica",
-              edit: false,
-              indicator: const CustomIndicator(
-                isActive: true,
-                status: "Vigente",
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Costo",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(1),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Último registro",
+                    description: "983km",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(1);
+                },
               ),
             ),
-            ShrinkCard(
-              title: "Impuestos",
-              edit: false,
-              indicator: const CustomIndicator(
-                isActive: true,
-                status: "Vigente",
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Conbustible",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(2),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Último registro",
+                    description: "983km",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(2);
+                },
               ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Lavado",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(3),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Último registro",
+                    description: "983km",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(3);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Bateria",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(4),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Último registro",
+                    description: "983km",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(4);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Cambio de aceite",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(5),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Último registro",
+                    description: "983km",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(5);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Mantenimiento general",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(6),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Último registro",
+                    description: "983km",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(6);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
             ),
           ],
         ),

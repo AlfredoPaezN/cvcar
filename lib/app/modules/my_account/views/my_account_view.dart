@@ -107,17 +107,34 @@ class MyAccountView extends GetView<MyAccountController> {
                 "No registra",
           ),
           SizedBox(
+            height: 10.h,
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(Routes.LICENSE_DETAIL);
+            },
+            child: CustomTileField(
+              trainingIcon: Icon(
+                Icons.medical_information_outlined,
+                size: 13.h,
+                color: Color(CVCarColors.grey),
+              ),
+              trailiingIcon: SizedBox(),
+              label: "Licencia de conducción",
+            ),
+          ),
+          SizedBox(
             height: 20.h,
           ),
-          SettingsSectin(),
+          SettingsSection(),
         ],
       ),
     );
   }
 }
 
-class SettingsSectin extends StatelessWidget {
-  const SettingsSectin({
+class SettingsSection extends StatelessWidget {
+  const SettingsSection({
     Key? key,
   }) : super(key: key);
 

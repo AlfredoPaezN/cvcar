@@ -6,7 +6,9 @@ class VehicleCvBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<VehicleCvController>(
-      () => VehicleCvController(),
+      () => VehicleCvController(
+        authController: Get.find(),
+      ),
     );
   }
 }

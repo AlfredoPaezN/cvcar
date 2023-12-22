@@ -1,5 +1,5 @@
 import 'package:cvcar_mobile/app/api/api.dart';
-import 'package:cvcar_mobile/app/models/data.dart';
+
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {

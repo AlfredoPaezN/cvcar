@@ -71,54 +71,6 @@ class VehicleDetailView extends GetView<VehicleDetailController> {
   }
 }
 
-// class LicenseDetail extends StatelessWidget {
-//   const LicenseDetail({
-//     Key? key,
-//     required this.controller,
-//   }) : super(key: key);
-
-//   final VehicleDetailController controller;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Column(
-//         children: [
-//           Row(
-//             children: [
-//               Image.asset(
-//                 "assets/categories/impuestos.png",
-//                 width: 30.h,
-//               ),
-//               SizedBox(
-//                 width: 10.w,
-//               ),
-//               Label(label: "Detalles de la licencia", sizeFont: 16.h),
-//             ],
-//           ),
-//           SizedBox(
-//             height: 10.h,
-//           ),
-//           Container(
-//             padding: EdgeInsets.all(10.h),
-//             width: double.infinity,
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(10),
-//               color: Color(CVCarColors.primaryColor),
-//             ),
-//             child: Column(children: [
-//               TileInfo(
-//                 label: "Placa",
-//                 description: "entry.value",
-//               ),
-//             ]),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class TileInfo extends StatelessWidget {
   const TileInfo({
     Key? key,

@@ -15,6 +15,7 @@ abstract class Routes {
   static const MY_ACCOUNT = _Paths.MY_ACCOUNT;
   static const VEHICLE_DETAIL = _Paths.VEHICLE_DETAIL;
   static const VEHICLE_CV = _Paths.VEHICLE_CV;
+  static const LICENSE_DETAIL = _Paths.LICENSE_DETAIL;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const MY_ACCOUNT = '/my-account';
   static const VEHICLE_DETAIL = '/vehicle-detail';
   static const VEHICLE_CV = '/vehicle-cv';
+  static const LICENSE_DETAIL = '/license-detail';
 }
