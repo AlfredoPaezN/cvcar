@@ -26,13 +26,13 @@ class OnboardingView extends GetView<OnboardingController> {
               physics: const BouncingScrollPhysics(),
               children: const [
                 _View(
-                  image: _LoadPngImage(path: 'assets/onboarding/ob1.png'),
+                  image: LoadPngImage(path: 'assets/onboarding/ob1.png'),
                 ),
                 _View(
-                  image: _LoadPngImage(path: 'assets/onboarding/ob2.png'),
+                  image: LoadPngImage(path: 'assets/onboarding/ob2.png'),
                 ),
                 _View(
-                  image: _LoadPngImage(path: 'assets/onboarding/ob3.png'),
+                  image: LoadPngImage(path: 'assets/onboarding/ob3.png'),
                 ),
               ],
             ),
@@ -54,8 +54,8 @@ class OnboardingView extends GetView<OnboardingController> {
   }
 }
 
-class _LoadPngImage extends StatelessWidget {
-  const _LoadPngImage({
+class LoadPngImage extends StatelessWidget {
+  const LoadPngImage({
     Key? key,
     required this.path,
   }) : super(key: key);

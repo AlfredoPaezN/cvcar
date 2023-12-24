@@ -59,7 +59,7 @@ class AuthController extends GetxService {
           vehiclesData.value =
               vehicleList.map((vehicle) => Vehicle.fromJson(vehicle)).toList();
         }
-        Get.toNamed(Routes.APP_NAVIGATION);
+        Get.toNamed(Routes.WELCOME);
       } catch (e) {
         errorMessage(
             '${response.body['message']}', 'Por favor intentalo de nuevo.');

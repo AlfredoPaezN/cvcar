@@ -17,21 +17,6 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-        height: 60.h,
-        child: Center(
-          child: GestureDetector(
-            onTap: () {
-              Get.toNamed(Routes.REGISTER);
-            },
-            child: Label(
-              label: 'Crea una cuenta CVCAR',
-              sizeFont: 12.h,
-              fontcolor: Color(CVCarColors.secondaryColor),
-            ),
-          ),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: ListView(
@@ -119,23 +104,27 @@ class LoginView extends GetView<LoginController> {
             const SizedBox(
               height: 43,
             ),
-            CustomButton(
-                color: Color(CVCarColors.secondaryColor),
-                isLoading: controller.isLoading.value,
-                label: controller.isLoading.value
-                    ? "Loading..."
-                    : "Iniciar sesión",
-                action: () {
-                  controller.login();
-                }),
+            Obx(
+              () => CustomButton(
+                  color: Color(CVCarColors.secondaryColor),
+                  isLoading: controller.isLoading.value,
+                  label: "Iniciar sesión",
+                  action: controller.isLoading.value
+                      ? () {}
+                      : () {
+                          FocusScope.of(context).unfocus();
+                          controller.login();
+                          // Get.toNamed(Routes.WELCOME);
+                        }),
+            ),
             // const IndicatorDivisor(),
-            SizedBox(
-              height: 43,
-            ),
+            // SizedBox(
+            //   height: 43,
+            // ),
             // const CustomDivider(),
-            const SizedBox(
-              height: 30,
-            ),
+            // const SizedBox(
+            //   height: 30,
+            // ),
             // CustomButton(
             //     color: Color(CVCarColors.primaryColor),
             //     label: "Continuar con Google",
@@ -146,6 +135,21 @@ class LoginView extends GetView<LoginController> {
             //       width: 15.w,
             //     ),
             //     action: () {}),
+            SizedBox(
+              height: 60.h,
+              child: Center(
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.REGISTER);
+                  },
+                  child: Label(
+                    label: 'Crea una cuenta CVCAR',
+                    sizeFont: 12.h,
+                    fontcolor: Color(CVCarColors.secondaryColor),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

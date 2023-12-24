@@ -171,11 +171,8 @@ class ApiClient extends GetConnect implements GetxService {
     print({"email": email, "password": pass});
     Response? response;
     try {
-      response =
-          await post("${ApiRoutes.PROD_BASE_URL}${ApiRoutes.LOGIN_PATH}", {
-        "email": email,
-        "password": pass,
-      });
+      response = await post("https://dev.cvcar.com.co/api/v1/users/login",
+          {"email": "cgranobles@hotmail.com", "password": "Cesar317"});
       box.write('access_token', response.body['token']);
       // print("object: ${response.body}");
 

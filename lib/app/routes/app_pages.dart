@@ -1,3 +1,4 @@
+import 'package:cvcar_mobile/app/modules/dashboard/views/welcome.dart';
 import 'package:get/get.dart';
 
 import '../modules/app_navigation/bindings/app_navigation_binding.dart';
@@ -71,6 +72,13 @@ class AppPages {
     GetPage(
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
+      binding: DashboardBinding(),
+      transitionDuration: const Duration(milliseconds: 200),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.WELCOME,
+      page: () => const WelcomeView(),
       binding: DashboardBinding(),
       transitionDuration: const Duration(milliseconds: 200),
       transition: Transition.fade,

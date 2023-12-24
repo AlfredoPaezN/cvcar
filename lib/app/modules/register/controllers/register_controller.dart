@@ -17,6 +17,8 @@ class RegisterController extends GetxController {
   RxBool isPasswordObscure = true.obs;
   RxBool isConfirmPasswordObscure = true.obs;
   RxBool isLoading = false.obs;
+  RxBool termsAndConditions = false.obs;
+  RxBool personalData = false.obs;
 
   GlobalKey<FormState> formRegister = GlobalKey<FormState>();
   bool isValidFormCreateDriverOne() {

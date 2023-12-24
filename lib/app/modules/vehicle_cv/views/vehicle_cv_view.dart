@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
-import 'package:cvcar_mobile/app/global/custom_indicator.dart';
 import 'package:cvcar_mobile/app/global/expandable_item.dart';
 import 'package:cvcar_mobile/app/modules/reservations/views/reservations_view.dart';
 import 'package:cvcar_mobile/app/modules/vehicle_detail/views/vehicle_detail_view.dart';

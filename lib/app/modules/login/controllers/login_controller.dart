@@ -1,5 +1,4 @@
 import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
-import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,6 +59,7 @@ class LoginController extends GetxController {
     if (formLogin.currentState!.validate()) {
       await authController.login(
           emailController.value.text, passController.value.text);
+      isLoading.value = false;
     }
 
     isLoading.value = false;

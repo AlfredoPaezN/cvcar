@@ -1,7 +1,6 @@
 import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_button.dart';
-import 'package:cvcar_mobile/app/global/custom_divider.dart';
 import 'package:cvcar_mobile/app/global/custom_dropdown_form_field.dart';
 import 'package:cvcar_mobile/app/global/custom_text_form_field.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
@@ -18,35 +17,6 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-        height: 70.h,
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Description(
-                label: '¿Ya tienes una cuenta?',
-                sizeFont: 12.h,
-                textAlign: TextAlign.center,
-                color: Colors.white,
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Label(
-                  label: 'Inicia sesión',
-                  sizeFont: 12.h,
-                  fontcolor: Color(CVCarColors.secondaryColor),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Obx(
@@ -149,7 +119,76 @@ class RegisterView extends GetView<RegisterController> {
               const SizedBox(
                 height: 14,
               ),
-
+              Row(
+                children: [
+                  SizedBox(
+                      height: 20.h,
+                      width: 20.h,
+                      child: Checkbox(
+                          activeColor: Color(CVCarColors.primaryColor),
+                          value: controller.termsAndConditions.value,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          onChanged: (value) {
+                            controller.termsAndConditions.value = value!;
+                          })),
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  Row(
+                    children: [
+                      Description(
+                        label: "Acepto ",
+                        sizeFont: 11.h,
+                        color: Color(CVCarColors.greyLight),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Description(
+                          label: "Términos y condiciones",
+                          sizeFont: 11.h,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                      height: 20.h,
+                      width: 20.h,
+                      child: Checkbox(
+                          activeColor: Color(CVCarColors.primaryColor),
+                          value: controller.personalData.value,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          onChanged: (value) {
+                            controller.personalData.value = value!;
+                          })),
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  Row(
+                    children: [
+                      Description(
+                        label: "Acepto el tratamiento de ",
+                        sizeFont: 11.h,
+                        color: Color(CVCarColors.greyLight),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Description(
+                          label: "Datos Personales",
+                          sizeFont: 11.h,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 43,
               ),
@@ -161,13 +200,43 @@ class RegisterView extends GetView<RegisterController> {
                     controller.register();
                   }),
               // const IndicatorDivisor(),
+              // SizedBox(
+              //   height: 43,
+              // ),
               SizedBox(
-                height: 43,
+                height: 50.h,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Description(
+                        label: '¿Ya tienes una cuenta?',
+                        sizeFont: 12.h,
+                        textAlign: TextAlign.center,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Label(
+                          label: 'Inicia sesión',
+                          sizeFont: 12.h,
+                          fontcolor: Color(CVCarColors.secondaryColor),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              const CustomDivider(),
-              const SizedBox(
-                height: 30,
-              ),
+              // const CustomDivider(),
+              // const SizedBox(
+              //   height: 30,
+              // ),
+
               // CustomButton(
               //     color: Color(CVCarColors.primaryColor),
               //     label: "Continuar con Google",

@@ -7,6 +7,9 @@ class RegisterVehicleController extends GetxController {
   final vehiclePlate = TextEditingController().obs;
   final documenType = TextEditingController().obs;
   final documenNumber = TextEditingController().obs;
+  RxBool termsAndConditions = false.obs;
+  RxBool personalData = false.obs;
+  RxBool isPropetary = true.obs;
 
   List<DropdownMenuItem<String>> documenTypeItemList = [
     const DropdownMenuItem(

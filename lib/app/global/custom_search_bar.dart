@@ -34,7 +34,6 @@ class CustomSearchBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData appTheme = Theme.of(context);
     return Container(
       padding: EdgeInsets.fromLTRB(
         leftPadding ?? 0,
