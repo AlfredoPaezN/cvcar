@@ -89,13 +89,13 @@ class TileInfo extends StatelessWidget {
         children: [
           Description(
             label: label,
-            sizeFont: 11.h,
+            sizeFont: 12.h,
             color: Color(CVCarColors.greyLight),
             // color: Colors.white,
           ),
           Label(
             label: description != "" ? description ?? "" : "No registra",
-            sizeFont: 11.h,
+            sizeFont: 12.h,
             // color: Colors.white,
           ),
         ],
@@ -261,12 +261,13 @@ class VehicleDetail extends StatelessWidget {
                 TileInfo(
                   label: "S. de transito",
                   description: controller
-                      .authController
-                      .vehiclesData
-                      .value?[controller.authController.vehicleSelected.value]
-                      .authorityTransit
-                      ?.name
-                      .substring(
+                          .authController
+                          .vehiclesData
+                          .value?[
+                              controller.authController.vehicleSelected.value]
+                          .authorityTransit
+                          ?.name ??
+                      "No registra".substring(
                           0,
                           (controller
                                           .authController
@@ -274,7 +275,7 @@ class VehicleDetail extends StatelessWidget {
                                           .value?[controller.authController
                                               .vehicleSelected.value]
                                           .authorityTransit
-                                          ?.name
+                                          ?.name!
                                           .length ??
                                       0) >
                                   23
@@ -285,7 +286,7 @@ class VehicleDetail extends StatelessWidget {
                                       .value?[controller
                                           .authController.vehicleSelected.value]
                                       .authorityTransit
-                                      ?.name
+                                      ?.name!
                                       .length ??
                                   0)),
                 ),

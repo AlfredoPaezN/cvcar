@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:cvcar_mobile/app/api/api_routes.dart';
-import 'package:cvcar_mobile/app/models/data.dart';
 import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:cvcar_mobile/app/utils/handle_error.dart';
 import 'package:get/get.dart';
@@ -171,10 +172,14 @@ class ApiClient extends GetConnect implements GetxService {
     print({"email": email, "password": pass});
     Response? response;
     try {
-      response = await post("https://dev.cvcar.com.co/api/v1/users/login",
-          {"email": "cgranobles@hotmail.com", "password": "Cesar317"});
+      response =
+          await post("${ApiRoutes.PROD_BASE_URL}${ApiRoutes.LOGIN_PATH}", {
+        "email": email,
+        "password": pass,
+      });
+
       box.write('access_token', response.body['token']);
-      // print("object: ${response.body}");
+      log("object: ${response.body}");
 
       return response;
     } catch (e, stackTrace) {
@@ -183,7 +188,25 @@ class ApiClient extends GetConnect implements GetxService {
     }
   }
 
-  Future<void> logout(String idToken) async {
+  //   print({"email": email, "password": pass});
+  // Response? response;
+  // try {
+  //   final response = await http.post(
+  //     Uri.parse("${ApiRoutes.PROD_BASE_URL}${ApiRoutes.LOGIN_PATH}"),
+  //     body: {
+  //       "email": email,
+  //       "password": pass,
+  //     },
+  //   );
+  //   final Map<String, dynamic> responseData = json.decode(response.body);
+  //   print("Respuesta exitosa: ${response.body}");
+  //   // box.write('access_token', response.body['token']);
+  //   // print("object: ${response.body}");
+
+  //   return response;
+
+  Future<void> logout() async {
     box.remove('access_token');
+    Get.offAndToNamed(Routes.LOGIN);
   }
 }

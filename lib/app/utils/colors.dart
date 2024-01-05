@@ -9,4 +9,5 @@ class CVCarColors {
   static const int greyLight = 0xFF757B87;
   static const int active = 0xFF2ABF30;
   static const int inactive = 0xFFD8D8D8;
+  static const int blueInfo = 0xFF135C9C;
 }

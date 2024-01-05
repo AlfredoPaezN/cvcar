@@ -41,8 +41,9 @@ class WelcomeView extends GetView<DashboardController> {
             SizedBox(
               height: 60.h,
             ),
-            const Label(
-              label: 'Hola Juanito',
+            Label(
+              label:
+                  'Hola ${controller.authController.userData.value?.firstName}',
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +92,7 @@ class WelcomeView extends GetView<DashboardController> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  Get.offAndToNamed(Routes.APP_NAVIGATION);
+                  Get.back();
                 },
                 child: Description(
                   label: "Continuar sin mi compañero",

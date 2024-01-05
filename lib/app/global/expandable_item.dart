@@ -25,19 +25,20 @@ class ExpandableItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      // enableFeedback: true,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Color(CVCarColors.primaryColor),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FadeInUp(
-              child: Container(
+    return FadeInRight(
+      duration: const Duration(milliseconds: 200),
+      child: InkWell(
+        onTap: onTap,
+        // enableFeedback: true,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Color(CVCarColors.primaryColor),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
                 padding: EdgeInsets.all(14),
                 height: 40.h,
                 child: Row(
@@ -81,25 +82,25 @@ class ExpandableItem extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            AnimatedCrossFade(
-              duration: const Duration(milliseconds: 150),
-              reverseDuration: const Duration(milliseconds: 1500),
-              firstCurve: Curves.bounceIn,
-              secondCurve: Curves.bounceIn,
-              firstChild: const SizedBox(),
-              crossFadeState: isExpanded
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              secondChild: IntrinsicHeight(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 14.0, right: 14.0, bottom: 7.0),
-                  child: expandedContent,
+              AnimatedCrossFade(
+                duration: const Duration(milliseconds: 150),
+                reverseDuration: const Duration(milliseconds: 1500),
+                firstCurve: Curves.bounceIn,
+                secondCurve: Curves.bounceIn,
+                firstChild: const SizedBox(),
+                crossFadeState: isExpanded
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                secondChild: IntrinsicHeight(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 14.0, right: 14.0, bottom: 7.0),
+                    child: expandedContent,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

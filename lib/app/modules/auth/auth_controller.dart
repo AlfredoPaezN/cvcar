@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cvcar_mobile/app/global/custom_snack.dart';
 import 'package:cvcar_mobile/app/models/driving.dart';
 import 'package:cvcar_mobile/app/models/register_user.dart';
@@ -50,19 +52,28 @@ class AuthController extends GetxService {
 
   Future<void> login(String email, String pass) async {
     Response response = await authService.login(email, pass);
+    log("drifsdfds");
+
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      // final driving = Driving.fromJson(response.body['driving']);
+      log("driving: sfsdfsdfds");
       try {
-        drivinData.value = Driving.fromJson(response.body['driving']);
+        if (response.body['driving'] != null) {
+          drivinData.value = Driving.fromJson(response.body['driving']);
+        }
+        // if (response.body['user']) {
         userData.value = User.fromJson(response.body['user']);
+        // }
         List<dynamic> vehicleList = response.body['vehicles'] ?? [];
         if (vehicleList.isNotEmpty) {
           vehiclesData.value =
               vehicleList.map((vehicle) => Vehicle.fromJson(vehicle)).toList();
         }
-        Get.toNamed(Routes.WELCOME);
+        // Get.toNamed(Routes.WELCOME);
+        Get.offAndToNamed(Routes.APP_NAVIGATION);
       } catch (e) {
         errorMessage(
-            '${response.body['message']}', 'Por favor intentalo de nuevo.');
+            '${response.body['message']}', 'Por favor intentalo de nuevo .');
       }
     } else {
       errorMessage(
@@ -85,14 +96,39 @@ class AuthController extends GetxService {
   Future<void> logout() async {
     try {
       isLogoutLoaded.value = true;
-      var box = GetStorage();
-      String idToken = box.read('id_token');
-      await authService.logout(idToken);
+      await authService.logout();
       user.value = null;
       isLogoutLoaded.value = false;
     } catch (e) {
       isLogoutLoaded.value = false;
       // showDefaultErrorMessage(e);
+    }
+  }
+
+  Future<void> deleteAccount(BuildContext context) async {
+    Response response = await authService.deleteAccount();
+
+    if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Modal Title'),
+            content: Text('This is the content of the modal dialog.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Close'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      errorMessage(
+          '${response.body['message']}', 'Por favor intentalo de nuevo .');
     }
   }
 

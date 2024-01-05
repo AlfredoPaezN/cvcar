@@ -30,11 +30,10 @@ class UserService extends GetxController {
   }
 
   Future<Response?> createUser(RegisterUser user) async {
-    print(
-        "ApiRoutes.CREATE_USER: ${ApiRoutes.PROD_BASE_URL}${ApiRoutes.CREATE_USER}");
+    print("ApiRoutes.CREATE_USER: ${ApiRoutes.PROD_BASE_URL}${ApiRoutes.USER}");
     try {
       Response response = await apiClient.postData(
-          "${ApiRoutes.PROD_BASE_URL}${ApiRoutes.CREATE_USER}", user.toJson());
+          "${ApiRoutes.PROD_BASE_URL}${ApiRoutes.USER}", user.toJson());
       print("response.body: ${response.body}");
       return response;
     } catch (e, s) {

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 class Role {
-  final String id;
-  final String name;
+  final String? id;
+  final String? name;
 
   Role({
-    required this.id,
-    required this.name,
+    this.id,
+    this.name,
   });
 
   Role copyWith({

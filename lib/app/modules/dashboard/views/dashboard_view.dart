@@ -119,7 +119,7 @@ class DashboardView extends GetView<DashboardController> {
             ),
             Expanded(
               child: OptionWithBody(
-                  label: 'Kilometraje',
+                  label: 'Costos',
                   body: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -278,7 +278,7 @@ class OptionWithBody extends StatelessWidget {
               Label(
                   label: label,
                   // fontcolor: Colors.black,
-                  sizeFont: 10.sp),
+                  sizeFont: 12.h),
               const Expanded(child: SizedBox()),
               Container(
                 width: 15.h,

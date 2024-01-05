@@ -1,24 +1,24 @@
 import 'dart:convert';
 
 class Entity {
-  final String id;
+  final String? id;
   final dynamic observations;
   final dynamic description;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final dynamic deletedAt;
-  final int state;
-  final String name;
+  final int? state;
+  final String? name;
 
   Entity({
-    required this.id,
-    required this.observations,
-    required this.description,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.deletedAt,
-    required this.state,
-    required this.name,
+    this.id,
+    this.observations,
+    this.description,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.state,
+    this.name,
   });
 
   Entity copyWith({
@@ -50,8 +50,12 @@ class Entity {
         id: json["id"],
         observations: json["observations"],
         description: json["description"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
         deletedAt: json["deletedAt"],
         state: json["state"],
         name: json["name"],
@@ -61,8 +65,8 @@ class Entity {
         "id": id,
         "observations": observations,
         "description": description,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
         "deletedAt": deletedAt,
         "state": state,
         "name": name,

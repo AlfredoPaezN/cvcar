@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
+import 'package:cvcar_mobile/app/global/custom_divider.dart';
+import 'package:cvcar_mobile/app/global/custom_indicator.dart';
 import 'package:cvcar_mobile/app/global/expandable_item.dart';
 import 'package:cvcar_mobile/app/modules/reservations/views/reservations_view.dart';
 import 'package:cvcar_mobile/app/modules/vehicle_detail/views/vehicle_detail_view.dart';
@@ -90,14 +92,79 @@ class VehicleCvView extends GetView<VehicleCvController> {
             ),
             Obx(
               () => ExpandableItem(
-                title: "Kilometraje",
+                edit: true,
+                title: "SOAT",
+                indicator: CustomIndicator(
+                  isActive:
+                      controller.dashboardController.getSoatStatusText() ==
+                              "Vigente"
+                          ? true
+                          : false,
+                  status: controller.dashboardController.getSoatStatusText(),
+                ),
                 isExpanded: controller.isExpanded.value ||
                     controller.cardIndexOpennedList.contains(0),
                 expandedContent: Column(children: [
+                  Padding(
+                      padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: const Color(CVCarColors.blueInfo),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.info_rounded,
+                              color: Colors.white,
+                              size: 20.h,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Description(
+                              color: Colors.white,
+                              label: "Faltan 5 meses para renovar tu SOAT.",
+                              sizeFont: 11.h,
+                            )
+                          ],
+                        ),
+                      )),
                   TileInfo(
-                    label: "Último registro",
-                    description: "983km",
+                    label: "Número de póliza",
+                    description: "876543278",
                   ),
+                  TileInfo(
+                    label: "Fecha de expedición",
+                    description: "07/10/2023",
+                  ),
+                  TileInfo(
+                    label: "Fecha de renovación",
+                    description: "07/10/2024",
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Description(
+                          label: "Estado",
+                          sizeFont: 12.h,
+                          color: Color(CVCarColors.greyLight),
+                          // color: Colors.white,
+                        ),
+                        CustomIndicator(
+                            isActive: controller.dashboardController
+                                        .getSoatStatusText() ==
+                                    "Vigente"
+                                ? true
+                                : false,
+                            status: controller.dashboardController
+                                .getSoatStatusText())
+                      ],
+                    ),
+                  )
                 ]),
                 onTap: () {
                   controller.handleExpand(0);
@@ -109,14 +176,83 @@ class VehicleCvView extends GetView<VehicleCvController> {
             ),
             Obx(
               () => ExpandableItem(
-                title: "Costo",
+                edit: true,
+                title: "Tecnomecánica",
+                indicator: CustomIndicator(
+                  isActive:
+                      controller.dashboardController.getTecnoStatusText() ==
+                              "Vigente"
+                          ? true
+                          : false,
+                  status: controller.dashboardController.getTecnoStatusText(),
+                ),
                 isExpanded: controller.isExpanded.value ||
                     controller.cardIndexOpennedList.contains(1),
                 expandedContent: Column(children: [
+                  Padding(
+                      padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: const Color(CVCarColors.blueInfo),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.info_rounded,
+                              color: Colors.white,
+                              size: 20.h,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Description(
+                              color: Colors.white,
+                              label: "Faltan 5 meses para revisión.",
+                              sizeFont: 11.h,
+                            )
+                          ],
+                        ),
+                      )),
                   TileInfo(
-                    label: "Último registro",
-                    description: "983km",
+                    label: "Centro de diagnostico",
+                    description: "TECNO MEC",
                   ),
+                  TileInfo(
+                    label: "Número de certificado",
+                    description: "876543278",
+                  ),
+                  TileInfo(
+                    label: "Fecha de expedición",
+                    description: "07/10/2023",
+                  ),
+                  TileInfo(
+                    label: "Fecha de renovación",
+                    description: "07/10/2023",
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Description(
+                          label: "Estado",
+                          sizeFont: 12.h,
+                          color: Color(CVCarColors.greyLight),
+                          // color: Colors.white,
+                        ),
+                        CustomIndicator(
+                            isActive: controller.dashboardController
+                                        .getTecnoStatusText() ==
+                                    "Vigente"
+                                ? true
+                                : false,
+                            status: controller.dashboardController
+                                .getTecnoStatusText())
+                      ],
+                    ),
+                  )
                 ]),
                 onTap: () {
                   controller.handleExpand(1);
@@ -128,13 +264,41 @@ class VehicleCvView extends GetView<VehicleCvController> {
             ),
             Obx(
               () => ExpandableItem(
-                title: "Conbustible",
+                title: "Kilometraje",
                 isExpanded: controller.isExpanded.value ||
                     controller.cardIndexOpennedList.contains(2),
                 expandedContent: Column(children: [
-                  TileInfo(
-                    label: "Último registro",
-                    description: "983km",
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4.0.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Description(
+                          label: "Kilometraje",
+                          sizeFont: 12.h,
+                          color: Color(CVCarColors.greyLight),
+                          // color: Colors.white,
+                        ),
+                        Description(
+                          label: "Fechas de resgitro",
+                          sizeFont: 12.h,
+                          color: Color(CVCarColors.greyLight),
+                          // color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  TileInfoMono(
+                    label: "9283 km",
+                    description: "12/04/2023",
+                  ),
+                  TileInfoMono(
+                    label: "9124 km",
+                    description: "06/04/2023",
+                  ),
+                  TileInfoMono(
+                    label: "9081 km",
+                    description: "12/04/2022",
                   ),
                 ]),
                 onTap: () {
@@ -147,13 +311,22 @@ class VehicleCvView extends GetView<VehicleCvController> {
             ),
             Obx(
               () => ExpandableItem(
-                title: "Lavado",
+                edit: true,
+                title: "Costo",
                 isExpanded: controller.isExpanded.value ||
                     controller.cardIndexOpennedList.contains(3),
                 expandedContent: Column(children: [
                   TileInfo(
-                    label: "Último registro",
-                    description: "983km",
+                    label: "Costos diarios",
+                    description: "20.000",
+                  ),
+                  TileInfo(
+                    label: "Costos mensuales",
+                    description: "600.000",
+                  ),
+                  TileInfo(
+                    label: "Costos anuales",
+                    description: "1.200.000",
                   ),
                 ]),
                 onTap: () {
@@ -166,13 +339,33 @@ class VehicleCvView extends GetView<VehicleCvController> {
             ),
             Obx(
               () => ExpandableItem(
-                title: "Bateria",
+                title: "Conbustible",
                 isExpanded: controller.isExpanded.value ||
                     controller.cardIndexOpennedList.contains(4),
                 expandedContent: Column(children: [
                   TileInfo(
+                    label: "Establecimiento",
+                    description: "Primax",
+                  ),
+                  TileInfo(
+                    label: "Tipo de combustible",
+                    description: "Corriente",
+                  ),
+                  TileInfo(
                     label: "Último registro",
-                    description: "983km",
+                    description: "12/04/2023",
+                  ),
+                  TileInfo(
+                    label: "Cantidad",
+                    description: "9gl",
+                  ),
+                  TileInfo(
+                    label: "Precio",
+                    description: "134.600 COP",
+                  ),
+                  TileInfo(
+                    label: "Precio por gl",
+                    description: "10.500 COP",
                   ),
                 ]),
                 onTap: () {
@@ -185,13 +378,25 @@ class VehicleCvView extends GetView<VehicleCvController> {
             ),
             Obx(
               () => ExpandableItem(
-                title: "Cambio de aceite",
+                title: "Lavados",
                 isExpanded: controller.isExpanded.value ||
                     controller.cardIndexOpennedList.contains(5),
                 expandedContent: Column(children: [
                   TileInfo(
+                    label: "Establecimiento",
+                    description: "Carsh wash",
+                  ),
+                  TileInfo(
+                    label: "Tipo de servicio",
+                    description: "Lavado",
+                  ),
+                  TileInfo(
                     label: "Último registro",
-                    description: "983km",
+                    description: "12/04/2023",
+                  ),
+                  TileInfo(
+                    label: "Precio",
+                    description: "134.600 COP",
                   ),
                 ]),
                 onTap: () {
@@ -204,17 +409,164 @@ class VehicleCvView extends GetView<VehicleCvController> {
             ),
             Obx(
               () => ExpandableItem(
-                title: "Mantenimiento general",
+                title: "Bateria",
+                edit: true,
                 isExpanded: controller.isExpanded.value ||
                     controller.cardIndexOpennedList.contains(6),
                 expandedContent: Column(children: [
                   TileInfo(
-                    label: "Último registro",
+                    label: "Establecimiento",
+                    description: "Baterias SAS",
+                  ),
+                  TileInfo(
+                    label: "Marca",
+                    description: "Bosh",
+                  ),
+                  TileInfo(
+                    label: "Tipo de bateria",
+                    description: "Celda húmedas",
+                  ),
+                  TileInfo(
+                    label: "Meses de garantía",
+                    description: "6 meses",
+                  ),
+                  TileInfo(
+                    label: "Fecha de compra",
+                    description: "25/10/2023",
+                  ),
+                  TileInfo(
+                    label: "Último",
                     description: "983km",
+                  ),
+                  TileInfo(
+                    label: "vencimiento garantia",
+                    description: "25/04/2024",
+                  ),
+                  TileInfo(
+                    label: "Precio",
+                    description: "1.000.000",
+                  ),
+                  TileInfo(
+                    label: "Libre de mantenimiento",
+                    description: "Si",
                   ),
                 ]),
                 onTap: () {
                   controller.handleExpand(6);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Cambio de aceite",
+                edit: true,
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(7),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Establecimiento",
+                    description: "Aceite SAS",
+                  ),
+                  TileInfo(
+                    label: "Marca",
+                    description: "Mobil",
+                  ),
+                  TileInfo(
+                    label: "Tipo",
+                    description: "15W-40",
+                  ),
+                  TileInfo(
+                    label: "Cantidad",
+                    description: "4.5 LT",
+                  ),
+                  TileInfo(
+                    label: "Fecha de cambio",
+                    description: "07/10/2023",
+                  ),
+                  TileInfo(
+                    label: "Fecha de proximo",
+                    description: "xxxxxx",
+                  ),
+                  TileInfo(
+                    label: "Km actual",
+                    description: "98765km",
+                  ),
+                  TileInfo(
+                    label: "Km para cambio",
+                    description: "134765km",
+                  ),
+                  TileInfo(
+                    label: "Costo",
+                    description: "134.678 COP",
+                  ),
+                  CustomDivider(),
+                  TileInfo(
+                    label: "Cambio filtro de aceite",
+                    description: "Si",
+                  ),
+                  TileInfo(
+                    label: "Cambio filtro de aire de motor",
+                    description: "Si",
+                  ),
+                  TileInfo(
+                    label: "Cambio filtro de cabina",
+                    description: "Si",
+                  ),
+                  TileInfo(
+                    label: "Cambio filtro de combustible",
+                    description: "Si",
+                  ),
+                ]),
+                onTap: () {
+                  controller.handleExpand(7);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Obx(
+              () => ExpandableItem(
+                title: "Mantenimiento general",
+                isExpanded: controller.isExpanded.value ||
+                    controller.cardIndexOpennedList.contains(8),
+                expandedContent: Column(children: [
+                  TileInfo(
+                    label: "Establecimiento",
+                    description: "Mantenimientos SAS",
+                  ),
+                  TileInfo(
+                    label: "Tipo",
+                    description: "Correctivo",
+                  ),
+                  TileInfo(
+                    label: "Fecha",
+                    description: "12/04/2023",
+                  ),
+                  TileInfo(
+                    label: "Precio",
+                    description: "134.600 COP",
+                  ),
+                  TileInfo(
+                    label: "Garantia",
+                    description: "6 meses",
+                  ),
+                  CustomDivider(),
+                  TileInfo(
+                    label: "Descripción",
+                    description: " ",
+                  ),
+                  Description(
+                    label:
+                        "Se arreglaron rayones de la puerta trasera y cambio de las dos llantas delanteras",
+                    color: Colors.white,
+                  )
+                ]),
+                onTap: () {
+                  controller.handleExpand(8);
                 },
               ),
             ),
@@ -381,6 +733,42 @@ class ShrinkCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TileInfoMono extends StatelessWidget {
+  const TileInfoMono({
+    Key? key,
+    required this.label,
+    this.description,
+    this.isBold = false,
+  }) : super(key: key);
+  final String label;
+  final String? description;
+  final bool isBold;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 4.0.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Label(
+            label: label,
+            sizeFont: 12.h,
+            fontcolor: Colors.white,
+            // color: Colors.white,
+          ),
+          Label(
+            label: description ?? "",
+            sizeFont: 12.h,
+            fontcolor: Colors.white,
+            // color: Colors.white,
+          ),
+        ],
       ),
     );
   }

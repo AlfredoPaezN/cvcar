@@ -1,3 +1,4 @@
+import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_tile.dart';
 import 'package:cvcar_mobile/app/routes/app_pages.dart';
@@ -126,7 +127,9 @@ class MyAccountView extends GetView<MyAccountController> {
           SizedBox(
             height: 20.h,
           ),
-          SettingsSection(),
+          SettingsSection(
+            controller: controller,
+          ),
         ],
       ),
     );
@@ -136,7 +139,10 @@ class MyAccountView extends GetView<MyAccountController> {
 class SettingsSection extends StatelessWidget {
   const SettingsSection({
     Key? key,
+    required this.controller,
   }) : super(key: key);
+
+  final MyAccountController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -191,24 +197,10 @@ class SettingsSection extends StatelessWidget {
           color: Color(CVCarColors.grey).withOpacity(0.3),
         ),
         CustomTileField(
-          justTopRounded: BorderRadiusEnum.none,
-          trainingIcon: Image.asset(
-            "assets/informative/contactanos.png",
-            width: 10.h,
-          ),
-          trailiingIcon: const SizedBox(),
-          label: "Contactános",
-        ),
-        Container(
-          height: 1.h,
-          width: double.infinity,
-          color: Color(CVCarColors.grey).withOpacity(0.3),
-        ),
-        CustomTileField(
           justTopRounded: BorderRadiusEnum.bottom,
           trainingIcon: Image.asset(
             "assets/informative/cvcar-isotipo-gris.png",
-            width: 13.h,
+            width: 12.h,
           ),
           trailiingIcon: const SizedBox(),
           label: "Sobre CVCAR",
@@ -220,7 +212,94 @@ class SettingsSection extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Get.offAllNamed(Routes.LOGIN);
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Color(CVCarColors.primaryColor),
+                  title: Label(
+                    label: 'Eliminar cuenta',
+                    fontcolor: Colors.white,
+                  ),
+                  content: Description(
+                    label: '¿Estas seguro que quieres eliminar la cuenta?',
+                    color: Colors.white,
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Description(
+                        label: 'Atrás',
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        controller.authController.deleteAccount(context);
+                      },
+                      child: Description(
+                        label: 'Cerrar sesion',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: CustomTileField(
+            justTopRounded: BorderRadiusEnum.none,
+            trainingIcon: Icon(Icons.delete_outline_outlined,
+                size: 13.h, color: Color(CVCarColors.grey)),
+            trailiingIcon: const SizedBox(),
+            label: "Eliminar cuenta",
+          ),
+        ),
+        Container(
+          height: 1.h,
+          width: double.infinity,
+          color: Color(CVCarColors.grey).withOpacity(0.3),
+        ),
+        GestureDetector(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Color(CVCarColors.primaryColor),
+                  title: Label(
+                    label: 'Cerrar sesion',
+                    fontcolor: Colors.white,
+                  ),
+                  content: Description(
+                    label: '¿Estas seguro que quieres cerrar sesion?',
+                    color: Colors.white,
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Description(
+                        label: 'Atrás',
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        controller.authController.logout();
+                      },
+                      child: Description(
+                        label: 'Cerrar sesion',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
           },
           child: CustomTileField(
             justTopRounded: BorderRadiusEnum.bottom,

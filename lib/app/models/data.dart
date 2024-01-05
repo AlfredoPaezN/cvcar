@@ -4,16 +4,16 @@ import 'package:cvcar_mobile/app/models/vehicle.dart';
 import 'dart:convert';
 
 class LoginData {
-  final String token;
-  final User user;
-  final Driving driving;
-  final List<Vehicle> vehicles;
+  final String? token;
+  final User? user;
+  final Driving? driving;
+  final List<Vehicle>? vehicles;
 
   LoginData({
-    required this.token,
-    required this.user,
-    required this.driving,
-    required this.vehicles,
+    this.token,
+    this.user,
+    this.driving,
+    this.vehicles,
   });
 
   LoginData copyWith({
@@ -36,16 +36,21 @@ class LoginData {
 
   factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
         token: json["token"],
-        user: User.fromJson(json["user"]),
-        driving: Driving.fromJson(json["driving"]),
-        vehicles: List<Vehicle>.from(
-            json["vehicles"].map((x) => Vehicle.fromJson(x))),
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        driving:
+            json["driving"] == null ? null : Driving.fromJson(json["driving"]),
+        vehicles: json["vehicles"] == null
+            ? []
+            : List<Vehicle>.from(
+                json["vehicles"]!.map((x) => Vehicle.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "token": token,
-        "user": user.toJson(),
-        "driving": driving.toJson(),
-        "vehicles": List<dynamic>.from(vehicles.map((x) => x.toJson())),
+        "user": user?.toJson(),
+        "driving": driving?.toJson(),
+        "vehicles": vehicles == null
+            ? []
+            : List<dynamic>.from(vehicles!.map((x) => x.toJson())),
       };
 }

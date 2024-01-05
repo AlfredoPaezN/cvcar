@@ -1,4 +1,6 @@
+import 'package:cvcar_mobile/app/models/vehicle.dart';
 import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
+import 'package:cvcar_mobile/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -19,16 +21,35 @@ class AppNavigationController extends GetxController {
 
   @override
   void onInit() {
+    getVehicleList(authController.vehiclesData.value);
+    if (authController.vehiclesData.value == null) {
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => Get.toNamed(Routes.WELCOME));
+    }
+
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  getVehicleList(List<Vehicle>? vehicles) {
+    print("charging vehicles");
     availableVehicles.value = [
-      ...authController.vehiclesData.value?.map((e) {
+      ...vehicles?.map((e) {
             return DropdownMenuItem(
-              child: Text(e.brand!.name +
+              child: Text(e.brand!.name! +
                   ' ' +
                   e.modelYear.toString() +
                   ' ' +
                   e.plate!),
-              value:
-                  e.brand!.name + ' ' + e.modelYear.toString() + ' ' + e.plate!,
+              value: e.brand!.name! +
+                  ' ' +
+                  e.modelYear.toString() +
+                  ' ' +
+                  e.plate!,
             );
           }).toList() ??
           [],
@@ -37,13 +58,6 @@ class AppNavigationController extends GetxController {
         value: '+ Agregar nuevo vehículo',
       ),
     ];
-
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
   }
 
   @override

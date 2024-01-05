@@ -94,7 +94,7 @@ class LicenseDetail extends StatelessWidget {
               TileInfo(
                 label: "Nombre",
                 description:
-                    "${controller.authController.userData.value?.firstName ?? ""} ${controller.authController.userData.value?.lastName ?? ""}",
+                    "${controller.authController.userData.value?.firstName?.substring(0, 7) ?? ""} ${controller.authController.userData.value?.lastName?.substring(0, 10) ?? ""}",
               ),
               TileInfo(
                 label: "No de licencia",
@@ -104,19 +104,19 @@ class LicenseDetail extends StatelessWidget {
               TileInfo(
                 label: "Categoria",
                 description: controller.authController.drivinData.value
-                    ?.licences?[0].details[0].drivingCategory.name,
+                    ?.licences?[0].details?[0].drivingCategory?.name,
               ),
               TileInfo(
                 label: "Fecha de expedición",
                 description: controller.authController.drivinData.value
-                    ?.licences?[0].details[0].dateExpedition
+                    ?.licences?[0].details?[0].dateExpedition
                     .toString()
                     .substring(0, 10),
               ),
               TileInfo(
                 label: "Fecha de vencimiento",
                 description: controller.authController.drivinData.value
-                    ?.licences?[0].details[0].dateExpiration
+                    ?.licences?[0].details?[0].dateExpiration
                     .toString()
                     .substring(0, 10),
               ),

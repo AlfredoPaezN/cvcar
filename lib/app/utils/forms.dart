@@ -6,10 +6,10 @@ String? validateNotEmpty(value) {
 }
 
 String? validatePassword(value) {
-  RegExp upperCaseRegex = RegExp(r'(?=.*?[A-Z])');
-  RegExp lowerCaseRegex = RegExp(r'(?=.*?[a-z])');
-  RegExp digitRegex = RegExp(r'(?=.*?[0-9])');
-  RegExp lengthRegex = RegExp(r'.{8,}');
+  // RegExp upperCaseRegex = RegExp(r'(?=.*?[A-Z])');
+  // RegExp lowerCaseRegex = RegExp(r'(?=.*?[a-z])');
+  // RegExp digitRegex = RegExp(r'(?=.*?[0-9])');
+  // RegExp lengthRegex = RegExp(r'.{8,}');
 
   if (value.isEmpty) {
     return 'Please enter a password';
@@ -17,21 +17,21 @@ String? validatePassword(value) {
 
   List<String> missingRequirements = [];
 
-  if (!upperCaseRegex.hasMatch(value)) {
-    missingRequirements.add('at least one uppercase letter');
-  }
+  // if (!upperCaseRegex.hasMatch(value)) {
+  //   missingRequirements.add('at least one uppercase letter');
+  // }
 
-  if (!lowerCaseRegex.hasMatch(value)) {
-    missingRequirements.add('at least one lowercase letter');
-  }
+  // if (!lowerCaseRegex.hasMatch(value)) {
+  //   missingRequirements.add('at least one lowercase letter');
+  // }
 
-  if (!digitRegex.hasMatch(value)) {
-    missingRequirements.add('at least one digit');
-  }
+  // if (!digitRegex.hasMatch(value)) {
+  //   missingRequirements.add('at least one digit');
+  // }
 
-  if (!lengthRegex.hasMatch(value)) {
-    missingRequirements.add('at least 8 characters');
-  }
+  // if (!lengthRegex.hasMatch(value)) {
+  //   missingRequirements.add('at least 8 characters');
+  // }
 
   if (missingRequirements.isNotEmpty) {
     return 'Password must contain ${missingRequirements.join(', ')}';

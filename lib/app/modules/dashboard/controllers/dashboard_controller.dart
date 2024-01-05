@@ -8,30 +8,21 @@ class DashboardController extends GetxController {
 
   @override
   void onInit() {
+    getCategoriesStatus();
+    super.onInit();
+  }
+
+  getCategoriesStatus() {
     categories.value = [
       {
         "image": "assets/categories/SOAT.png",
         "title": "SOAT",
-        "status": authController
-                    .vehiclesData
-                    .value?[authController.vehicleSelected.value]
-                    .soats?[0]
-                    .isExpired ??
-                false
-            ? "Expirado"
-            : "Vigente",
+        "status": getSoatStatusText(),
       },
       {
         "image": "assets/categories/tecnomecanica.png",
         "title": "Tecno mecánica",
-        "status": authController
-                    .vehiclesData
-                    .value?[authController.vehicleSelected.value]
-                    .tecnomechanics?[0]
-                    .isExpired ??
-                false
-            ? "Expirado"
-            : "Vigente",
+        "status": getTecnoStatusText(),
       },
       {
         "image": "assets/categories/extintor.png",
@@ -49,7 +40,37 @@ class DashboardController extends GetxController {
         "status": "Configurar",
       },
     ].obs;
-    super.onInit();
+  }
+
+  String getTecnoStatusText() {
+    final vehiclesData = authController.vehiclesData.value;
+    final vehicleSelectedIndex = authController.vehicleSelected.value;
+
+    return (vehiclesData != null &&
+            vehiclesData.length > vehicleSelectedIndex &&
+            vehiclesData[vehicleSelectedIndex].tecnomechanics != null &&
+            vehiclesData[vehicleSelectedIndex].tecnomechanics!.isNotEmpty &&
+            vehiclesData[vehicleSelectedIndex].tecnomechanics![0]?.isExpired !=
+                null)
+        ? (vehiclesData[vehicleSelectedIndex].tecnomechanics![0]!.isExpired!
+            ? "Expirado"
+            : "Vigente")
+        : "No data";
+  }
+
+  String getSoatStatusText() {
+    final vehiclesData = authController.vehiclesData.value;
+    final vehicleSelectedIndex = authController.vehicleSelected.value;
+
+    return (vehiclesData != null &&
+            vehiclesData.length > vehicleSelectedIndex &&
+            vehiclesData[vehicleSelectedIndex].soats != null &&
+            vehiclesData[vehicleSelectedIndex].soats!.isNotEmpty &&
+            vehiclesData[vehicleSelectedIndex].soats![0].isExpired != null)
+        ? (vehiclesData[vehicleSelectedIndex].soats![0].isExpired!
+            ? "Expirado"
+            : "Vigente")
+        : "No data";
   }
 
   @override

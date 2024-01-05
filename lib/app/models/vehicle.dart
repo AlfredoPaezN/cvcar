@@ -40,7 +40,7 @@ class Vehicle {
   final Driving? driving;
   final Entity? brand;
   final Entity? vehicleClass;
-  final List<Soat>? tecnomechanics;
+  final List<Soat?>? tecnomechanics;
   final List<Soat>? soats;
 
   Vehicle({
@@ -218,12 +218,12 @@ class Vehicle {
         brand: json["brand"] == null ? null : Entity.fromJson(json["brand"]),
         vehicleClass:
             json["class"] == null ? null : Entity.fromJson(json["class"]),
-        tecnomechanics: json["tecnomechanics"] == null
-            ? []
+        tecnomechanics: json["tecnomechanics"][0] == null
+            ? <Soat>[]
             : List<Soat>.from(
                 json["tecnomechanics"]!.map((x) => Soat.fromJson(x))),
-        soats: json["soats"] == null
-            ? []
+        soats: json["soats"][0] == null
+            ? <Soat>[]
             : List<Soat>.from(json["soats"]!.map((x) => Soat.fromJson(x))),
       );
 
@@ -265,7 +265,7 @@ class Vehicle {
         "class": vehicleClass?.toJson(),
         "tecnomechanics": tecnomechanics == null
             ? []
-            : List<dynamic>.from(tecnomechanics!.map((x) => x.toJson())),
+            : List<dynamic>.from(tecnomechanics!.map((x) => x?.toJson())),
         "soats": soats == null
             ? []
             : List<dynamic>.from(soats!.map((x) => x.toJson())),
