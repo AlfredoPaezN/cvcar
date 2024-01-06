@@ -50,9 +50,12 @@ class DashboardController extends GetxController {
             vehiclesData.length > vehicleSelectedIndex &&
             vehiclesData[vehicleSelectedIndex].tecnomechanics != null &&
             vehiclesData[vehicleSelectedIndex].tecnomechanics!.isNotEmpty &&
-            vehiclesData[vehicleSelectedIndex].tecnomechanics![0]?.isExpired !=
+            vehiclesData[vehicleSelectedIndex].tecnomechanics![0]?.dateExpiry !=
                 null)
-        ? (vehiclesData[vehicleSelectedIndex].tecnomechanics![0]!.isExpired!
+        ? (vehiclesData[vehicleSelectedIndex]
+                .tecnomechanics![0]!
+                .dateExpiry!
+                .isBefore(DateTime.now())
             ? "Expirado"
             : "Vigente")
         : "No data";
@@ -63,11 +66,13 @@ class DashboardController extends GetxController {
     final vehicleSelectedIndex = authController.vehicleSelected.value;
 
     return (vehiclesData != null &&
-            vehiclesData.length > vehicleSelectedIndex &&
             vehiclesData[vehicleSelectedIndex].soats != null &&
             vehiclesData[vehicleSelectedIndex].soats!.isNotEmpty &&
-            vehiclesData[vehicleSelectedIndex].soats![0].isExpired != null)
-        ? (vehiclesData[vehicleSelectedIndex].soats![0].isExpired!
+            vehiclesData[vehicleSelectedIndex].soats![0].endDate != null)
+        ? (vehiclesData[vehicleSelectedIndex]
+                .soats![0]
+                .endDate!
+                .isBefore(DateTime.now())
             ? "Expirado"
             : "Vigente")
         : "No data";

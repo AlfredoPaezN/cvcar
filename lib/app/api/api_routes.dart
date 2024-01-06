@@ -1,8 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class ApiRoutes {
-  // static const PROD_BASE_URL = 'https://prod.cvcar.com.co$API_PATH';
-  static const PROD_BASE_URL = 'https://dev.cvcar.com.co$API_PATH';
+  static const PROD_BASE_URL = 'https://prod.cvcar.com.co$API_PATH';
+  // static const PROD_BASE_URL = 'https://dev.cvcar.com.co$API_PATH';
   static const API_PATH = '/api/v1/';
   static const LOGIN_PATH = 'users/login';
   static const USER = 'users';

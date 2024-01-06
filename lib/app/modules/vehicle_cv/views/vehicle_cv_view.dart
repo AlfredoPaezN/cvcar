@@ -125,7 +125,8 @@ class VehicleCvView extends GetView<VehicleCvController> {
                             ),
                             Description(
                               color: Colors.white,
-                              label: "Faltan 5 meses para renovar tu SOAT.",
+                              label:
+                                  "Faltan ${controller.calculateMonthsDifference(DateTime.now(), controller.authController.vehiclesData.value![controller.authController.vehicleSelected.value].soats![0].endDate!)} meses para revisión.",
                               sizeFont: 11.h,
                             )
                           ],
@@ -133,15 +134,49 @@ class VehicleCvView extends GetView<VehicleCvController> {
                       )),
                   TileInfo(
                     label: "Número de póliza",
-                    description: "876543278",
+                    description: controller
+                        .authController
+                        .vehiclesData
+                        .value?[controller.authController.vehicleSelected.value]
+                        .soats?[0]
+                        .numberPolicy,
                   ),
                   TileInfo(
-                    label: "Fecha de expedición",
-                    description: "07/10/2023",
-                  ),
+                      label: "Fecha de expedición",
+                      description: controller
+                                  .authController
+                                  .vehiclesData
+                                  .value?[controller
+                                      .authController.vehicleSelected.value]
+                                  .soats?[0]
+                                  .dateExpedit !=
+                              null
+                          ? controller.dateFormat.format(controller
+                              .authController
+                              .vehiclesData
+                              .value![controller
+                                  .authController.vehicleSelected.value]
+                              .soats![0]
+                              .dateExpedit!)
+                          : ""),
                   TileInfo(
                     label: "Fecha de renovación",
-                    description: "07/10/2024",
+                    description: controller
+                                .authController
+                                .vehiclesData
+                                .value?[controller
+                                    .authController.vehicleSelected.value]
+                                .soats?[0]
+                                .updatedAt !=
+                            null
+                        ? controller.dateFormat.format(controller
+                            .authController
+                            .vehiclesData
+                            .value![
+                                controller.authController.vehicleSelected.value]
+                            .soats![0]
+                            .endDate!)
+                        : "",
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 4.0.h),
@@ -209,7 +244,8 @@ class VehicleCvView extends GetView<VehicleCvController> {
                             ),
                             Description(
                               color: Colors.white,
-                              label: "Faltan 5 meses para revisión.",
+                              label:
+                                  "Faltan ${controller.calculateMonthsDifference(DateTime.now(), controller.authController.vehiclesData.value![controller.authController.vehicleSelected.value].tecnomechanics![0]!.dateExpiry!)} meses para revisión.",
                               sizeFont: 11.h,
                             )
                           ],
@@ -217,19 +253,59 @@ class VehicleCvView extends GetView<VehicleCvController> {
                       )),
                   TileInfo(
                     label: "Centro de diagnostico",
-                    description: "TECNO MEC",
+                    description: controller
+                        .authController
+                        .vehiclesData
+                        .value?[controller.authController.vehicleSelected.value]
+                        .tecnomechanics?[0]
+                        ?.agency
+                        ?.name
+                        ?.substring(0, 10),
                   ),
                   TileInfo(
                     label: "Número de certificado",
-                    description: "876543278",
+                    description: controller
+                        .authController
+                        .vehiclesData
+                        .value?[controller.authController.vehicleSelected.value]
+                        .tecnomechanics?[0]
+                        ?.certificateNumber,
                   ),
                   TileInfo(
                     label: "Fecha de expedición",
-                    description: "07/10/2023",
+                    description: controller
+                                .authController
+                                .vehiclesData
+                                .value?[controller
+                                    .authController.vehicleSelected.value]
+                                .tecnomechanics?[0] !=
+                            null
+                        ? controller.dateFormat.format(controller
+                            .authController
+                            .vehiclesData
+                            .value![
+                                controller.authController.vehicleSelected.value]
+                            .tecnomechanics![0]!
+                            .dateExpedit!)
+                        : "",
                   ),
                   TileInfo(
                     label: "Fecha de renovación",
-                    description: "07/10/2023",
+                    description: controller
+                                .authController
+                                .vehiclesData
+                                .value?[controller
+                                    .authController.vehicleSelected.value]
+                                .tecnomechanics?[0] !=
+                            null
+                        ? controller.dateFormat.format(controller
+                            .authController
+                            .vehiclesData
+                            .value![
+                                controller.authController.vehicleSelected.value]
+                            .tecnomechanics![0]!
+                            .dateExpiry!)
+                        : "",
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 4.0.h),

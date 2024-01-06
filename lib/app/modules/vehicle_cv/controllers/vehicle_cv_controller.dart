@@ -1,6 +1,7 @@
 import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
 import 'package:cvcar_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class VehicleCvController extends GetxController {
   AuthController authController;
@@ -9,6 +10,7 @@ class VehicleCvController extends GetxController {
       {required this.authController, required this.dashboardController});
   RxBool isExpanded = false.obs;
   RxList<int> cardIndexOpennedList = <int>[].obs;
+  DateFormat dateFormat = DateFormat("dd/MM/yyyy");
 
   @override
   void onInit() {
@@ -23,6 +25,12 @@ class VehicleCvController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  int calculateMonthsDifference(DateTime startDate, DateTime endDate) {
+    int startMonths = startDate.year * 12 + startDate.month;
+    int endMonths = endDate.year * 12 + endDate.month;
+    return endMonths - startMonths;
   }
 
   handleExpand(int index) {

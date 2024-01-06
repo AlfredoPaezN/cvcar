@@ -266,10 +266,21 @@ class VehicleDetail extends StatelessWidget {
                           .value?[
                               controller.authController.vehicleSelected.value]
                           .authorityTransit
-                          ?.name ??
-                      "No registra".substring(
-                          0,
-                          (controller
+                          ?.name
+                          ?.substring(
+                              0,
+                              (controller
+                                              .authController
+                                              .vehiclesData
+                                              .value?[controller.authController
+                                                  .vehicleSelected.value]
+                                              .authorityTransit
+                                              ?.name!
+                                              .length ??
+                                          0) >
+                                      20
+                                  ? 20
+                                  : (controller
                                           .authController
                                           .vehiclesData
                                           .value?[controller.authController
@@ -277,18 +288,8 @@ class VehicleDetail extends StatelessWidget {
                                           .authorityTransit
                                           ?.name!
                                           .length ??
-                                      0) >
-                                  23
-                              ? 23
-                              : (controller
-                                      .authController
-                                      .vehiclesData
-                                      .value?[controller
-                                          .authController.vehicleSelected.value]
-                                      .authorityTransit
-                                      ?.name!
-                                      .length ??
-                                  0)),
+                                      0)) ??
+                      "No registra",
                 ),
               ]),
             ),

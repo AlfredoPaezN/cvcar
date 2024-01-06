@@ -1,7 +1,7 @@
-import 'package:cvcar_mobile/app/font/description.dart';
 import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_tile.dart';
 import 'package:cvcar_mobile/app/routes/app_pages.dart';
+import 'package:cvcar_mobile/app/utils/alerts.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -212,42 +212,14 @@ class SettingsSection extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            showDialog(
+            informationAlert(
               context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: Color(CVCarColors.primaryColor),
-                  title: Label(
-                    label: 'Eliminar cuenta',
-                    fontcolor: Colors.white,
-                  ),
-                  content: Description(
-                    label: '¿Estas seguro que quieres eliminar la cuenta?',
-                    color: Colors.white,
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Description(
-                        label: 'Atrás',
-                        color: Colors.white,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        controller.authController.deleteAccount(context);
-                      },
-                      child: Description(
-                        label: 'Cerrar sesion',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                );
+              infoMessage: "¿Estas seguro que quieres eliminar la cuenta?",
+              callback: () {
+                controller.authController.deleteAccount(context);
               },
-            );
+              title: "Cerrar sesión",
+            ).show();
           },
           child: CustomTileField(
             justTopRounded: BorderRadiusEnum.none,
@@ -264,42 +236,14 @@ class SettingsSection extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            showDialog(
+            informationAlert(
               context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: Color(CVCarColors.primaryColor),
-                  title: Label(
-                    label: 'Cerrar sesion',
-                    fontcolor: Colors.white,
-                  ),
-                  content: Description(
-                    label: '¿Estas seguro que quieres cerrar sesion?',
-                    color: Colors.white,
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Description(
-                        label: 'Atrás',
-                        color: Colors.white,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        controller.authController.logout();
-                      },
-                      child: Description(
-                        label: 'Cerrar sesion',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                );
+              infoMessage: "¿Estas seguro que quieres cerrar sesión?",
+              callback: () {
+                controller.authController.logout();
               },
-            );
+              title: "Cerrar sesión",
+            ).show();
           },
           child: CustomTileField(
             justTopRounded: BorderRadiusEnum.bottom,

@@ -39,7 +39,7 @@ class AppNavigationView extends GetView<AppNavigationController> {
                 ),
                 Obx(
                   () => CustomDropdownFormField(
-                    width: 200.w,
+                    width: 220.w,
                     items: controller.availableVehicles.value!,
                     // hint: 'Tipo de documento',
                     enableBorder: false,
