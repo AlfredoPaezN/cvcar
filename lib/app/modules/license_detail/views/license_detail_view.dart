@@ -14,44 +14,31 @@ class LicenseDetailView extends GetView<LicenseDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Color(CVCarColors.primaryColor),
-            title: FadeInLeft(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Color(CVCarColors.primaryColor),
+          title: FadeInLeft(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
                   ),
-                  Image.asset(
-                    'assets/logo/isotipo_color.png',
-                    width: 40.h,
-                  ),
-                ],
-              ),
-            )),
-        body: ListView(
-          padding: const EdgeInsets.all(25.0),
-          children: [
-            LicenseDetail(controller: controller),
-            SizedBox(
-              height: 20.h,
+                ),
+                Image.asset(
+                  'assets/logo/isotipo_color.png',
+                  width: 40.h,
+                ),
+              ],
             ),
-            SizedBox(
-              height: 20.h,
-            ),
-            SizedBox(
-              height: 30.h,
-            ),
-          ],
-        ));
+          )),
+      body: LicenseDetail(controller: controller),
+    );
   }
 }
 
@@ -65,65 +52,64 @@ class LicenseDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                "assets/categories/impuestos.png",
-                width: 30.h,
-              ),
-              SizedBox(
-                width: 10.w,
-              ),
-              Label(label: "Detalles de la licencia", sizeFont: 16.h),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Container(
-            padding: EdgeInsets.all(10.h),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Color(CVCarColors.primaryColor),
+    return ListView(
+      padding: const EdgeInsets.all(25.0),
+      children: [
+        Row(
+          children: [
+            Image.asset(
+              "assets/categories/impuestos.png",
+              width: 30.h,
             ),
-            child: Column(children: [
-              TileInfo(
-                label: "Nombre",
-                description:
-                    "${controller.authController.userData.value?.firstName?.substring(0, 7) ?? ""} ${controller.authController.userData.value?.lastName?.substring(0, 10) ?? ""}",
-              ),
-              TileInfo(
-                label: "No de licencia",
-                description: controller.authController.drivinData.value
-                    ?.licences?[0].licenceDrivingNumber,
-              ),
-              TileInfo(
-                label: "Categoria",
-                description: controller.authController.drivinData.value
-                    ?.licences?[0].details?[0].drivingCategory?.name,
-              ),
-              TileInfo(
-                label: "Fecha de expedición",
-                description: controller.authController.drivinData.value
-                    ?.licences?[0].details?[0].dateExpedition
-                    .toString()
-                    .substring(0, 10),
-              ),
-              TileInfo(
-                label: "Fecha de vencimiento",
-                description: controller.authController.drivinData.value
-                    ?.licences?[0].details?[0].dateExpiration
-                    .toString()
-                    .substring(0, 10),
-              ),
-            ]),
+            SizedBox(
+              width: 10.w,
+            ),
+            Label(label: "Detalles de la licencia", sizeFont: 16.h),
+          ],
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        Container(
+          padding: EdgeInsets.all(10.h),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(CVCarColors.primaryColor),
           ),
-        ],
-      ),
+          child: Column(children: [
+            TileInfo(
+              label: "Nombre",
+              description:
+                  "${controller.authController.userData.value?.firstName?.substring(0, 7) ?? ""} ${controller.authController.userData.value?.lastName?.substring(0, 10) ?? ""}",
+            ),
+            TileInfo(
+              label: "No de licencia",
+              description: controller.authController.drivinData.value
+                  ?.licences?[0].licenceDrivingNumber,
+            ),
+            TileInfo(
+              label: "Categoria",
+              description: controller.authController.drivinData.value
+                  ?.licences?[0].details?[0].drivingCategory?.name,
+            ),
+            TileInfo(
+              label: "Fecha de expedición",
+              description: controller.authController.drivinData.value
+                  ?.licences?[0].details?[0].dateExpedition
+                  .toString()
+                  .substring(0, 10),
+            ),
+            TileInfo(
+              label: "Fecha de vencimiento",
+              description: controller.authController.drivinData.value
+                  ?.licences?[0].details?[0].dateExpiration
+                  .toString()
+                  .substring(0, 10),
+            ),
+          ]),
+        ),
+      ],
     );
   }
 }

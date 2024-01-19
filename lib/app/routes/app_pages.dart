@@ -1,10 +1,12 @@
-import 'package:cvcar_mobile/app/modules/dashboard/views/welcome.dart';
 import 'package:get/get.dart';
 
 import '../modules/app_navigation/bindings/app_navigation_binding.dart';
 import '../modules/app_navigation/views/app_navigation_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/dashboard/views/welcome.dart';
+import '../modules/forgot_password/bindings/forgot_password_binding.dart';
+import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/license_detail/bindings/license_detail_binding.dart';
 import '../modules/license_detail/views/license_detail_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -114,6 +116,11 @@ class AppPages {
       name: _Paths.LICENSE_DETAIL,
       page: () => const LicenseDetailView(),
       binding: LicenseDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => const ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
     ),
   ];
 }

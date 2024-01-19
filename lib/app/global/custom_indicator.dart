@@ -6,12 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomIndicator extends StatelessWidget {
   const CustomIndicator({
     Key? key,
-    required this.isActive,
+    required this.statusString,
     required this.status,
   }) : super(key: key);
 
-  final bool isActive;
-  final String status;
+  final colorStatus status;
+  final String statusString;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,12 @@ class CustomIndicator extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 // borderRadius: BorderRadius.circular(4),
-                color: isActive
-                    ? const Color(CVCarColors.active)
-                    : const Color(CVCarColors.inactive),
+                color: setColor(status),
               ),
             ),
             Center(
-              child:
-                  Label(label: status, fontcolor: Colors.white, sizeFont: 8.sp),
+              child: Label(
+                  label: statusString, fontcolor: Colors.white, sizeFont: 8.sp),
             ),
           ],
         ),
@@ -47,3 +45,20 @@ class CustomIndicator extends StatelessWidget {
     );
   }
 }
+
+Color setColor(status) {
+  switch (status) {
+    case colorStatus.active:
+      return const Color(CVCarColors.active);
+
+    case colorStatus.inactive:
+      return const Color(CVCarColors.secondaryColor);
+
+    case colorStatus.none:
+      return const Color(CVCarColors.inactive);
+    default:
+      return const Color(CVCarColors.inactive);
+  }
+}
+
+enum colorStatus { active, inactive, none }

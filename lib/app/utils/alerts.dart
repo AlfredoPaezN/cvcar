@@ -2,6 +2,7 @@ import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 Alert informationAlert({
@@ -68,7 +69,7 @@ Alert informationAlert({
     buttons: [
       DialogButton(
         color: const Color(CVCarColors.secondaryColor),
-        onPressed: callback,
+        onPressed: callback ?? () => Get.back(),
         width: 200.w,
         child: Label(
           label: "Confirm",

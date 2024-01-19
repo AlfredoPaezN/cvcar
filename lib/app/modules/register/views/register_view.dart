@@ -3,6 +3,7 @@ import 'package:cvcar_mobile/app/font/title.dart';
 import 'package:cvcar_mobile/app/global/custom_button.dart';
 import 'package:cvcar_mobile/app/global/custom_dropdown_form_field.dart';
 import 'package:cvcar_mobile/app/global/custom_text_form_field.dart';
+import 'package:cvcar_mobile/app/utils/alerts.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:cvcar_mobile/app/utils/forms.dart';
 import 'package:flutter/material.dart';
@@ -197,7 +198,22 @@ class RegisterView extends GetView<RegisterController> {
                   label: "Registrarme",
                   isLoading: controller.isLoading.value,
                   action: () {
-                    controller.register();
+                    if (!controller.personalData.value) {
+                      informationAlert(
+                        context: context,
+                        infoMessage:
+                            "Debes aceptar el tratamiento de datos personales",
+                        title: "Datos personales",
+                      ).show();
+                    } else if (!controller.termsAndConditions.value) {
+                      informationAlert(
+                        context: context,
+                        infoMessage: "Debes aceptar los términos y condiciones",
+                        title: "Térmimos y condiciones",
+                      ).show();
+                    } else {
+                      controller.register();
+                    }
                   }),
               // const IndicatorDivisor(),
               // SizedBox(

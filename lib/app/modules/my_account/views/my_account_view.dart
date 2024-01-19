@@ -182,14 +182,20 @@ class SettingsSection extends StatelessWidget {
           width: double.infinity,
           color: Color(CVCarColors.grey).withOpacity(0.3),
         ),
-        CustomTileField(
-          justTopRounded: BorderRadiusEnum.none,
-          trainingIcon: Image.asset(
-            "assets/informative/politicas-de-privacidad.png",
-            width: 10.h,
+        GestureDetector(
+          onTap: () {
+            controller
+                .lauchLink("https://cvcar.vercel.app/politica-de-privacidad");
+          },
+          child: CustomTileField(
+            justTopRounded: BorderRadiusEnum.none,
+            trainingIcon: Image.asset(
+              "assets/informative/politicas-de-privacidad.png",
+              width: 10.h,
+            ),
+            trailiingIcon: const SizedBox(),
+            label: "Politicas de privacidad",
           ),
-          trailiingIcon: const SizedBox(),
-          label: "Politicas de privacidad",
         ),
         Container(
           height: 1.h,
@@ -218,7 +224,7 @@ class SettingsSection extends StatelessWidget {
               callback: () {
                 controller.authController.deleteAccount(context);
               },
-              title: "Cerrar sesión",
+              title: "Eliminar cuenta",
             ).show();
           },
           child: CustomTileField(

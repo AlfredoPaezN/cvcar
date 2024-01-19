@@ -92,11 +92,16 @@ class LoginView extends GetView<LoginController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Description(
-                  label: 'Olvidé mi contraseña',
-                  sizeFont: 10.h,
-                  textAlign: TextAlign.center,
-                  color: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.FORGOT_PASSWORD);
+                  },
+                  child: Description(
+                    label: 'Olvidé mi contraseña',
+                    sizeFont: 10.h,
+                    textAlign: TextAlign.center,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

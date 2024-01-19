@@ -88,8 +88,8 @@ class ReservationCard extends StatelessWidget {
                 ),
               ),
               const CustomIndicator(
-                isActive: true,
-                status: "Vigente",
+                status: colorStatus.active,
+                statusString: "Vigente",
               )
             ],
           ),

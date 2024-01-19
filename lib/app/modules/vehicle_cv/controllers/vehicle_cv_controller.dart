@@ -1,3 +1,4 @@
+import 'package:cvcar_mobile/app/global/custom_indicator.dart';
 import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
 import 'package:cvcar_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,19 @@ class VehicleCvController extends GetxController {
       cardIndexOpennedList.remove(index);
     } else {
       cardIndexOpennedList.add(index);
+    }
+  }
+
+  String setStringStatus(status) {
+    switch (status) {
+      case colorStatus.active:
+        return "Vigente";
+
+      case colorStatus.inactive:
+        return "Vencido";
+
+      default:
+        return "Configurar";
     }
   }
 }

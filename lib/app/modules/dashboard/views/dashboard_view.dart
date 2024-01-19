@@ -193,11 +193,11 @@ class DashboardView extends GetView<DashboardController> {
                                 Expanded(
                                     flex: 2,
                                     child: CustomIndicator(
-                                      isActive: controller.categories
-                                              .value![index]['status'] ==
-                                          "Vigente",
                                       status: controller
-                                          .categories.value![index]['status']!,
+                                          .categories.value![index]['status'],
+                                      statusString: controller.setStringStatus(
+                                          controller.categories.value![index]
+                                              ['status']!),
                                     )),
                               ]),
                             ),

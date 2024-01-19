@@ -3,6 +3,7 @@ import 'package:cvcar_mobile/app/global/custom_button.dart';
 import 'package:cvcar_mobile/app/global/custom_dropdown_form_field.dart';
 import 'package:cvcar_mobile/app/global/custom_text_form_field.dart';
 import 'package:cvcar_mobile/app/routes/app_pages.dart';
+import 'package:cvcar_mobile/app/utils/alerts.dart';
 import 'package:cvcar_mobile/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -245,7 +246,23 @@ class RegisterVehicleView extends GetView<RegisterVehicleController> {
                     label: "Registrar vehículo",
                     isLoading: controller.isLoading.value,
                     action: () {
-                      controller.createVehicle(context);
+                      if (!controller.personalData.value) {
+                        informationAlert(
+                          context: context,
+                          infoMessage:
+                              "Debes aceptar el tratamiento de datos personales",
+                          title: "Eliminar cuenta",
+                        ).show();
+                      } else if (!controller.termsAndConditions.value) {
+                        informationAlert(
+                          context: context,
+                          infoMessage:
+                              "Debes aceptar los términos y condiciones",
+                          title: "Eliminar cuenta",
+                        ).show();
+                      } else {
+                        controller.createVehicle(context);
+                      }
                     }),
                 SizedBox(
                   height: 5.h,

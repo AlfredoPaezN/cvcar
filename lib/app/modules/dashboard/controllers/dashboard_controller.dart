@@ -1,10 +1,12 @@
+import 'package:cvcar_mobile/app/global/custom_indicator.dart';
 import 'package:cvcar_mobile/app/modules/auth/auth_controller.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
   AuthController authController;
   DashboardController({required this.authController});
-  Rxn<List<Map<String, String>>> categories = Rxn<List<Map<String, String>>>();
+  Rxn<List<Map<String, dynamic>>> categories =
+      Rxn<List<Map<String, dynamic>>>();
 
   @override
   void onInit() {
@@ -27,22 +29,22 @@ class DashboardController extends GetxController {
       {
         "image": "assets/categories/extintor.png",
         "title": "Extintor",
-        "status": "Configurar",
+        "status": colorStatus.none,
       },
       {
         "image": "assets/categories/cambiodeaceite.png",
         "title": "Aceite",
-        "status": "Configurar",
+        "status": colorStatus.none,
       },
       {
         "image": "assets/categories/baterias.png",
         "title": "Bateria",
-        "status": "Configurar",
+        "status": colorStatus.none,
       },
     ].obs;
   }
 
-  String getTecnoStatusText() {
+  colorStatus getTecnoStatusText() {
     final vehiclesData = authController.vehiclesData.value;
     final vehicleSelectedIndex = authController.vehicleSelected.value;
 
@@ -56,12 +58,12 @@ class DashboardController extends GetxController {
                 .tecnomechanics![0]!
                 .dateExpiry!
                 .isBefore(DateTime.now())
-            ? "Expirado"
-            : "Vigente")
-        : "No data";
+            ? colorStatus.active
+            : colorStatus.inactive)
+        : colorStatus.none;
   }
 
-  String getSoatStatusText() {
+  colorStatus getSoatStatusText() {
     final vehiclesData = authController.vehiclesData.value;
     final vehicleSelectedIndex = authController.vehicleSelected.value;
 
@@ -73,9 +75,22 @@ class DashboardController extends GetxController {
                 .soats![0]
                 .endDate!
                 .isBefore(DateTime.now())
-            ? "Expirado"
-            : "Vigente")
-        : "No data";
+            ? colorStatus.active
+            : colorStatus.inactive)
+        : colorStatus.none;
+  }
+
+  String setStringStatus(status) {
+    switch (status) {
+      case colorStatus.active:
+        return "Vigente";
+
+      case colorStatus.inactive:
+        return "Vencido";
+
+      default:
+        return "Configurar";
+    }
   }
 
   @override
