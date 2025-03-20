@@ -209,7 +209,21 @@ class VehicleCvView extends GetView<VehicleCvController> {
               height: 15.h,
             ),
             Obx(
-              () => controller.authController.vehiclesData.value != null
+              () => controller.authController.vehiclesData.value != null &&
+                      controller
+                              .authController
+                              .vehiclesData
+                              .value![controller
+                                  .authController.vehicleSelected.value]
+                              .tecnomechanics !=
+                          null &&
+                      controller
+                          .authController
+                          .vehiclesData
+                          .value![
+                              controller.authController.vehicleSelected.value]
+                          .tecnomechanics!
+                          .isNotEmpty
                   ? ExpandableItem(
                       edit: true,
                       title: "Tecnomecánica",
@@ -335,9 +349,24 @@ class VehicleCvView extends GetView<VehicleCvController> {
                     )
                   : SizedBox(),
             ),
-            SizedBox(
-              height: 15.h,
-            ),
+            controller.authController.vehiclesData.value != null &&
+                    controller
+                            .authController
+                            .vehiclesData
+                            .value![
+                                controller.authController.vehicleSelected.value]
+                            .tecnomechanics !=
+                        null &&
+                    controller
+                        .authController
+                        .vehiclesData
+                        .value![controller.authController.vehicleSelected.value]
+                        .tecnomechanics!
+                        .isNotEmpty
+                ? SizedBox(
+                    height: 15.h,
+                  )
+                : SizedBox(),
             Obx(
               () => controller.authController.vehiclesData.value != null
                   ? ExpandableItem(

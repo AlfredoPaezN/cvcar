@@ -58,8 +58,8 @@ class DashboardController extends GetxController {
                 .tecnomechanics![0]!
                 .dateExpiry!
                 .isBefore(DateTime.now())
-            ? colorStatus.active
-            : colorStatus.inactive)
+            ? colorStatus.inactive
+            : colorStatus.active)
         : colorStatus.none;
   }
 
@@ -75,8 +75,8 @@ class DashboardController extends GetxController {
                 .soats![0]
                 .endDate!
                 .isBefore(DateTime.now())
-            ? colorStatus.active
-            : colorStatus.inactive)
+            ? colorStatus.inactive
+            : colorStatus.active)
         : colorStatus.none;
   }
 

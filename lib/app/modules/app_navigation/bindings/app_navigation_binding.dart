@@ -20,6 +20,7 @@ class AppNavigationBinding extends Bindings {
     Get.lazyPut(() => AuthController(
           userService: Get.find(),
           authService: Get.find(),
+          apiClient: Get.find(),
         ));
     Get.lazyPut(() => DashboardController(
           authController: Get.find(),

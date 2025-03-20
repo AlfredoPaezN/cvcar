@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:cvcar_mobile/app/api/api.dart';
+import 'package:cvcar_mobile/app/api/api_routes.dart';
 import 'package:cvcar_mobile/app/global/custom_snack.dart';
 import 'package:cvcar_mobile/app/models/driving.dart';
 import 'package:cvcar_mobile/app/models/register_user.dart';
@@ -14,7 +16,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class AuthController extends GetxService {
-  AuthController({required this.authService, required this.userService});
+  AuthController(
+      {required this.authService,
+      required this.userService,
+      required this.apiClient});
+  ApiClient apiClient;
 
   AuthService authService;
   UserService userService;
@@ -78,6 +84,18 @@ class AuthController extends GetxService {
     } else {
       errorMessage(
           '${response.body['message']}', 'Por favor intentalo de nuevo .');
+    }
+  }
+
+  Future<Response> sendEmailForgotPass(String email) async {
+    Response? response;
+    try {
+      response = await apiClient.postData(
+          "${ApiRoutes.PROD_BASE_URL}${ApiRoutes.USER}${ApiRoutes.EMAIL_FORGOT_PASS}$email");
+      return response;
+    } catch (e, stackTrace) {
+      handleError(e, stackTrace);
+      rethrow;
     }
   }
 

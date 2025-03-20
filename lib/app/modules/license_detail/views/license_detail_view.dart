@@ -81,7 +81,7 @@ class LicenseDetail extends StatelessWidget {
             TileInfo(
               label: "Nombre",
               description:
-                  "${controller.authController.userData.value?.firstName?.substring(0, 7) ?? ""} ${controller.authController.userData.value?.lastName?.substring(0, 10) ?? ""}",
+                  "${controller.authController.userData.value?.firstName}  ${(controller.authController.userData.value?.lastName?.length ?? 0) > 10 ? controller.authController.userData.value?.lastName?.substring(0, 10) ?? "" : controller.authController.userData.value?.lastName}",
             ),
             TileInfo(
               label: "No de licencia",
